@@ -14,7 +14,6 @@ export default function Home() {
       <WhyZophix />
       <Brand />
       <Review />
-      <div className="min-h-screen text-white">Hero Section Goes here </div>
     </div>
   );
 }
