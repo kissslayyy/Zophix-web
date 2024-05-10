@@ -4,17 +4,17 @@ import Reveal from "../animation/Reveal";
 const Offer = () => {
   return (
     <Reveal>
-      <div className=" py-5 px-4 w-full ">
-        <div className="py-8 grid grid-cols-3 lg:grid-cols-4 gap-5 border-t-2 border-b-2 border-purple-600">
+      <div className="  w-full ">
+        <div className="py-8 grid grid-cols-4 lg:grid-cols-4 gap-2.5 lg:gap-5 border-t-2 border-b-2 border-pink-600">
           {/* :WEBSITE NAME */}
           <h2 className="col-span-full lg:col-span-1 inline-flex justify-center items-center text-xl text-gray-100 font-bold">
             Only on Zophix.com
           </h2>
 
           {/* :FREE SHIPPING */}
-          <div className="col-span-full md:col-span-1 flex flex-col md:flex-row justify-center items-center">
+          <div className="col-span-2 md:col-span-1 flex flex-col md:flex-row justify-center items-center">
             {/* ::Picture */}
-            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-indigo-100">
+            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-pink-100">
               <svg
                 className="h-10 text-black fill-current"
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +35,9 @@ const Offer = () => {
           </div>
 
           {/* :FREE SAMPLES */}
-          <div className="col-span-full md:col-span-1 flex flex-col md:flex-row justify-center items-center">
+          <div className="col-span-2 md:col-span-1 flex flex-col md:flex-row justify-center items-center">
             {/* ::Picture */}
-            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-indigo-100">
+            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-pink-100">
               <svg
                 className="h-10 text-black fill-current"
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +58,9 @@ const Offer = () => {
           </div>
 
           {/* :SURPRISES */}
-          <div className="col-span-full md:col-span-1 flex flex-col md:flex-row justify-center items-center">
+          <div className=" col-span-full md:col-span-1 flex flex-col md:flex-row justify-center items-center">
             {/* ::Picture */}
-            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-indigo-100">
+            <div className="w-1/3 py-2 inline-flex justify-center items-center rounded-md bg-pink-100">
               <svg
                 className="h-10 text-black fill-current"
                 xmlns="http://www.w3.org/2000/svg"

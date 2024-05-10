@@ -6,21 +6,21 @@ import { Button } from "../ui/button";
 export function Service() {
   const tabs = [
     {
-      title: "Service#1",
+      title: "Screen Repair",
       value: "screen",
       content: (
         <div className="w-full   overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Service#1</p>
+          <p>Screen Repair</p>
           <DummyContent />
         </div>
       ),
     },
     {
-      title: "Service#2",
+      title: "Battery Repair",
       value: "battery",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Service#2</p>
+          <p>Battery Repair</p>
           <DummyContent />
         </div>
       ),
@@ -97,9 +97,7 @@ const DummyContent = () => {
           veniam tempora deserunt? Molestiae eius quidem quam repellat.
         </p>
 
-        <Button className="my-2  bg-blue-500 hover:bg-blue-600">
-          Book Now!
-        </Button>
+        <Button className="my-2  ">Book Now!</Button>
       </div>
 
       <div className="h-64 overflow-hidden rounded-lg sm:h-80  lg:h-full">

@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import Reveal from "../animation/Reveal";
 import { TypewriterEffectSmooth } from "../animation/typewriter-effect";
+import Image from "next/image";
 
 export const Hero = () => {
   const words = [
@@ -24,33 +25,47 @@ export const Hero = () => {
   ];
   return (
     <Reveal>
-      <section className="relative bg-[url(https://ld-wp73.template-help.com/wordpress/prod_30970/v1/wp-content/uploads/2021/05/home.png)] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-gradient-to-r bg-black/5  sm:from-black/95 sm:to-white/0 "></div>
-
-        <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
-          <div className="max-w-xl text-start ltr:sm:text-left rtl:sm:text-right">
-            <h1 className="text-3xl font-extrabold sm:text-5xl">
-              <TypewriterEffectSmooth words={words} />
-              {/* <strong className="block font-extrabold text-purple-700">
-                {" "}
-                Phone Forever .{" "}
-              </strong> */}
-            </h1>
-            <Reveal>
-              <p className="mt-4 max-w-lg sm:text-xl/relaxed">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Nesciunt illo tenetur fuga ducimus numquam ea!
+      <main className=" relative overflow-hidden lg:h-screen">
+        <div className=" flex relative z-20 items-center overflow-hidden">
+          <div className="container mx-auto px-6 flex relative py-16">
+            <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
+              <span className="w-20 h-2 bg-white mb-12"></span>
+              <h1 className="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none text-white ">
+                Let us
+                <span className="text-3xl sm:text-5xl">Fix Your Phone</span>
+              </h1>
+              <p className="text-sm sm:text-base  text-white">
+                Dimension of reality that makes change possible and
+                understandable. An indefinite and homogeneous environment in
+                which natural events and human existence take place.
               </p>
-
-              <div className="mt-8 flex flex-wrap gap-4 text-center">
-                <Button className="bg-blue-500 hover:bg-blue-600">
-                  Book Your slot Now
-                </Button>
+              <div className="flex mt-8">
+                <a
+                  href="#"
+                  className="uppercase py-2 px-4 rounded-lg bg-pink-500 border-2 border-transparent text-white text-md mr-4 hover:bg-pink-400"
+                >
+                  Get started
+                </a>
+                <a
+                  href="#"
+                  className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-pink-500 text-pink-500 text-white hover:bg-pink-500 hover:text-white text-md"
+                >
+                  Read more
+                </a>
               </div>
-            </Reveal>
+            </div>
+            <div className=" hidden md:block h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+              <Image
+                alt=""
+                width={500}
+                height={500}
+                src="/heroNew.png"
+                className=" h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
-      </section>
+      </main>
     </Reveal>
   );
 };
