@@ -48,14 +48,17 @@ const content = [
 const words = [
   {
     text: "Why",
+    className: "lg:text:3xl xl:text-5xl font-bold text-3xl dark:",
   },
   {
     text: "choose",
+    className: "lg:text:3xl xl:text-5xl font-bold text-3xl dark:",
   },
 
   {
     text: "Zophix.",
-    className: "text-blue-500 dark:text-blue-500",
+    className:
+      "text-blue-500 lg:text:3xl xl:text-5xl font-bold text-3xl dark:text-blue-500",
   },
 ];
 export function WhyZophix() {

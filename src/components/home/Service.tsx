@@ -6,52 +6,52 @@ import { Button } from "../ui/button";
 export function Service() {
   const tabs = [
     {
-      title: "Screen Repair",
+      title: "Screen ",
       value: "screen",
       content: (
         <div className="w-full   overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Screen Repair</p>
-          <DummyContent />
+          <p>Cracked screen?</p>
+          <DummyContent content=" Is your phone's once-vibrant display now a spiderweb of cracks? Don't let a shattered screen hinder your productivity or entertainment. Zophix offers expert screen replacement services. We'll quickly and efficiently replace your damaged screen, restoring your phone's crystal-clear clarity and touch responsiveness." />
         </div>
       ),
     },
     {
-      title: "Battery Repair",
+      title: "Battery ",
       value: "battery",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Battery Repair</p>
-          <DummyContent />
+          <p>Battery dying fast?</p>
+          <DummyContent content=" Does your phone constantly beg for a charger, leaving you scrambling for an outlet? Zophix can breathe new life into your device. We'll replace your worn-out battery with a fresh one, ensuring you have lasting power throughout the day. No more worrying about missing important calls or messages because your phone died prematurely." />
         </div>
       ),
     },
     {
-      title: "Service#3",
+      title: "Backpanel",
       value: "playground",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Service#3</p>
-          <DummyContent />
+          <p>Broken backpanel?</p>
+          <DummyContent content=" We understand that everyday wear and tear can take a toll on your phone's appearance. Scratches and scuffs on the backpanel can make it look dull and worn. At Zophix, we offer backpanel replacement services. We'll restore your phone's sleek and stylish look, making it feel brand new again." />
         </div>
       ),
     },
     {
-      title: "Service#4",
+      title: "Charging Point",
       value: "content",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Service#4</p>
-          <DummyContent />
+          <p>Charging issues?</p>
+          <DummyContent content=" A faulty charging port can be a major inconvenience. It can leave you disconnected from the world and frustrated. Zophix can diagnose and fix charging port issues. Our skilled technicians will get your phone charging properly again, ensuring you can stay connected without any worries." />
         </div>
       ),
     },
     {
-      title: "Service#5",
+      title: "Sound",
       value: "random",
       content: (
         <div className="w-full  relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Service#5</p>
-          <DummyContent />
+          <p>Muffled sound?</p>
+          <DummyContent content=" Are your calls plagued by muffled speakers or a malfunctioning microphone? Don't let poor audio quality hinder your communication. Zophix can repair your phone's entire audio system. We'll ensure your calls are loud and clear, and you can enjoy crystal-clear audio for music and videos." />
         </div>
       ),
     },
@@ -87,14 +87,12 @@ export function Service() {
   );
 }
 
-const DummyContent = () => {
+const DummyContent = ({ content }: { content: string }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
       <div className=" my-auto">
-        <p className="mt-1  lg:mt-4 text-xs  font-normal lg:font-semibold md:text-lg text-gray-50">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui hic
-          atque tenetur quis eius quos ea neque sunt, accusantium soluta minus
-          veniam tempora deserunt? Molestiae eius quidem quam repellat.
+        <p className="mt-1 line-clamp-4 md:line-clamp-none  text-xs  font-thin lg:font-medium md:text-lg text-gray-50">
+          {content}
         </p>
 
         <Button className="my-2  ">Book Now!</Button>

@@ -1,91 +1,50 @@
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 export const Footer = () => {
   return (
     <div className="mt-8 bg-violet-900 pt-9">
       <div className="mx-auto w-full max-w-[1166px] px-4 xl:px-0">
-        <div className="flex flex-col justify-between sm:px-[18px] md:flex-row md:px-10">
+        <div className="flex flex-col justify-even sm:px-[18px] md:flex-row md:px-10">
           <div className="md:w-[316px]">
-            <p className="text-[18px] font-medium text-white"></p>
-            <h1 className="text-white font-extrabold">
-              <span className="text-rose-600">YOUR</span>LOGO
-            </h1>
-            <p />
-            <p className="mt-[18px] text-[15px] font-normal text-white/[80%]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
-              fugit non. Incidunt dolorum adipisci, tempore asperiores nemo odio
-              facere officiis enim animi placeat eaque nesciunt alias beatae id,
-              at dicta.
-            </p>
-            <div className="mt-[18px] flex gap-4">
+            <Image
+              alt="facebook icon"
+              width={200}
+              height={200}
+              className=" "
+              src="https://ucarecdn.com/5f0c61d8-e60b-4fb6-b33d-430f625c02a7/zophix__com2__pdfio_removebgpreview.png"
+            />{" "}
+            <div className=" flex gap-4">
               <a className="hover:scale-110" target="_blank" href="#">
-                <img
-                  alt="facebook icon"
-                  loading="lazy"
-                  width={36}
-                  height={36}
-                  decoding="async"
-                  data-nimg={1}
-                  style={{ color: "transparent" }}
-                  src="https://www.englishyaari.com/img/facebook.svg"
-                />
+                <FacebookIcon />
               </a>
               <a className="hover:scale-110" target="_blank" href="/">
-                <img
-                  alt="linkdin icon"
-                  loading="lazy"
-                  width={36}
-                  height={36}
-                  decoding="async"
-                  data-nimg={1}
-                  style={{ color: "transparent" }}
-                  src="https://www.englishyaari.com/img/linkdin.svg"
-                />
+                <LinkedinIcon />
               </a>
               <a className="hover:scale-110" target="_blank" href="/">
-                <img
-                  alt="instagram icon"
-                  loading="lazy"
-                  width={36}
-                  height={36}
-                  decoding="async"
-                  data-nimg={1}
-                  style={{ color: "transparent" }}
-                  src="https://www.englishyaari.com/img/instagram1.svg"
-                />
+                <InstagramIcon />
               </a>
               <a className="hover:scale-110" target="_blank" href="">
-                <img
-                  alt="twitter icon"
-                  loading="lazy"
-                  width={36}
-                  height={36}
-                  decoding="async"
-                  data-nimg={1}
-                  style={{ color: "transparent" }}
-                  src="https://www.englishyaari.com/img/twitter.svg"
-                />
+                <TwitterIcon />
               </a>
               <a
                 className="hover:scale-110"
                 target="_blank"
                 href="https://www.youtube.com/"
               >
-                <img
-                  alt="youtube icon"
-                  loading="lazy"
-                  width={36}
-                  height={36}
-                  decoding="async"
-                  data-nimg={1}
-                  style={{ color: "transparent" }}
-                  src="https://www.englishyaari.com/img/youtube.svg"
-                />
+                <YoutubeIcon />
               </a>
             </div>
           </div>
           <div className="md:w-[316px]">
-            <div className="mt-[23px] flex">
+            <div className="mt-[23px] justify-start flex">
               <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                 <svg
                   width={24}
@@ -102,14 +61,11 @@ export const Footer = () => {
               </div>
               <div className="ml-[18px]">
                 <a
-                  href="tel:+911800123444"
+                  href="tel:6209 933 099"
                   className="font-Inter text-[14px] font-medium text-white"
                 >
-                  +91 1800123444
+                  +91 6209 933 099
                 </a>
-                <p className="font-Inter text-[12px] font-medium text-white">
-                  Support Number
-                </p>
               </div>
             </div>
             <div className="mt-[23px] flex">
@@ -132,11 +88,8 @@ export const Footer = () => {
                   href="mailto:help@lorem.com"
                   className="font-Inter text-[14px] font-medium text-[#fff]"
                 >
-                  help@lorem.com
+                  amolkumar9934@gmail.com
                 </a>
-                <p className="font-Inter text-[12px] font-medium text-[#fff]">
-                  Support Email
-                </p>
               </div>
             </div>
             <div className="mt-[23px] flex">
@@ -159,16 +112,14 @@ export const Footer = () => {
                   href="mailto:help@lorem.com"
                   className="font-Inter text-[14px] font-medium text-[#fff]"
                 >
-                  Sub Nerul, Mumbia, India, 123456
+                  J.P NAGAR W.NO 06
+                  <br /> MADHEPURA Bihar - 852113 India
                 </a>
-                <p className="font-Inter text-[12px] font-medium text-white">
-                  Address
-                </p>
               </div>
             </div>
           </div>
-          <div className="mt-6 flex w-full flex-col justify-between text-white sm:flex-row md:mt-0 md:max-w-[341px]">
-            <div className="">
+          <div className="mt-6 flex w-full flex-col justify-end text-white sm:flex-row md:mt-0 md:max-w-[341px]">
+            <div className="w-full">
               <p className="text-deutziawhite font-inter text-[18px] font-medium leading-normal">
                 Pages
               </p>
@@ -223,34 +174,45 @@ export const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="mt-6 flex flex-col gap-4 sm:mt-0">
+            <div className="mt-6  flex flex-col  gap-4 sm:mt-0">
               <p className="text-deutziawhite font-inter text-[18px] font-medium">
                 Download the app
               </p>
-              <div className="flex gap-4 sm:flex-col">
+              <div className="flex gap-4 justify-end sm:flex-col">
                 <a target="_blank" href="#">
-                  <img
-                    alt="facebook icon"
-                    loading="lazy"
-                    width={168}
-                    height={50}
-                    decoding="async"
-                    data-nimg={1}
-                    style={{ color: "transparent" }}
-                    src="https://www.englishyaari.com/img/google-store.svg"
-                  />
+                  <button className="flex mt-3 w-48 h-14 bg-transparent text-black border border-black rounded-xl items-center justify-center">
+                    <div className="mr-3">
+                      <svg viewBox="0 0 384 512" width="30">
+                        <path
+                          fill="currentColor"
+                          d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-xs">Download on the</div>
+                      <div className="text-2xl font-semibold font-sans -mt-1">
+                        App Store
+                      </div>
+                    </div>
+                  </button>
                 </a>
                 <a target="_blank" href="#">
-                  <img
-                    alt="facebook icon"
-                    loading="lazy"
-                    width={168}
-                    height={50}
-                    decoding="async"
-                    data-nimg={1}
-                    style={{ color: "transparent" }}
-                    src="https://www.englishyaari.com/img/apple-store.svg"
-                  />
+                  <button className="flex mt-3 w-48 h-14 bg-transparent text-white border border-white rounded-xl items-center justify-center">
+                    <div className="mr-3 w-10">
+                      <img
+                        alt="text"
+                        className="size-28 invert"
+                        src="https://www.svgrepo.com/show/394180/google-play.svg"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-xs">Download on the</div>
+                      <div className="text-2xl font-semibold font-sans -mt-1">
+                        Play store
+                      </div>
+                    </div>
+                  </button>
                 </a>
               </div>
             </div>
@@ -261,7 +223,7 @@ export const Footer = () => {
           <p className="text-[10px] font-normal text-white md:text-[12px]">
             © Copyright
             {/* */}2024
-            {/* */}, All Rights Reserved by YOUR WEBSITES. PVT. LTD
+            {/* */}, All Rights Reserved by Zophix. PVT. LTD
           </p>
         </div>
       </div>

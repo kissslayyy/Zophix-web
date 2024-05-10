@@ -1,12 +1,19 @@
+import Image from "next/image";
 import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 hidden bg-black/30  backdrop-blur-lg lg:block ">
+    <nav className="sticky top-0 z-50  bg-black/30  backdrop-blur-lg ">
       <div className="mx-4 my-auto   px-4">
         <div className="grid h-24 grid-cols-12 items-center justify-between">
           <div className="  col-span-2 ">
-            <h1 className="text-2xl font-black text-white">Zophix</h1>
+            <Image
+              alt="facebook icon"
+              width={500}
+              height={500}
+              className="object-contain"
+              src="https://ucarecdn.com/5e1282d6-c786-4c80-8ced-217daa5fb84d/zophix__com2__pdfio_removebgpreview1.png"
+            />{" "}
           </div>
           <div className="col-span-8 mx-auto hidden space-x-4 text-lg font-light text-white md:block">
             <a href="#">About</a>

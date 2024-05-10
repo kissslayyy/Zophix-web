@@ -5,7 +5,7 @@ const Offer = () => {
   return (
     <Reveal>
       <div className="  w-full ">
-        <div className="py-8 grid grid-cols-4 lg:grid-cols-4 gap-2.5 lg:gap-5 border-t-2 border-b-2 border-pink-600">
+        <div className="py-8 grid grid-cols-1 lg:grid-cols-4 gap-2.5 lg:gap-5 border-t-2 border-b-2 border-pink-600">
           {/* :WEBSITE NAME */}
           <h2 className="col-span-full lg:col-span-1 inline-flex justify-center items-center text-xl text-gray-100 font-bold">
             Only on Zophix.com
