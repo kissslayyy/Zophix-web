@@ -62,7 +62,7 @@ export const Footer = () => {
               <div className="ml-[18px]">
                 <a
                   href="tel:6209 933 099"
-                  className="font-Inter text-[14px] font-medium text-white"
+                  className="font-Inter text-[14px]  font-medium text-white"
                 >
                   +91 6209 933 099
                 </a>
