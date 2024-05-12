@@ -6,7 +6,7 @@ export function Review() {
     {
       text: "Testimonial.",
       className:
-        "text-blue-500 lg:text:3xl xl:text-5xl font-bold text-3xl dark:text-blue-500",
+        "text-blue-500 lg:text:3xl xl:text-5xl font-bold text-2xl dark:text-blue-500",
     },
   ];
   return (

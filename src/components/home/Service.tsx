@@ -59,24 +59,21 @@ export function Service() {
   const words = [
     {
       text: "Services",
-      className: " lg:text:3xl xl:text-5xl font-bold text-xl dark:",
+      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
     },
-    {
-      text: "we",
-      className: " lg:text:3xl xl:text-5xl font-bold text-xl dark:",
-    },
+
     {
       text: "offer",
-      className: " lg:text:3xl xl:text-5xl font-bold text-xl dark:",
+      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
     },
     {
       text: "at",
-      className: " lg:text:3xl xl:text-5xl font-bold text-xl dark:",
+      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
     },
     {
       text: "Zophix.",
       className:
-        "text-blue-500 lg:text:3xl xl:text-5xl font-bold text-xl dark:text-blue-500",
+        "text-blue-500 lg:text:3xl xl:text-5xl font-bold text-2xl dark:text-blue-500",
     },
   ];
   return (
