@@ -43,8 +43,8 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="md:w-[316px]">
-            <div className="mt-[23px] justify-start flex">
+          <div className="md:w-[316px] max-sm:mt-7">
+            <div className="lg:mt-[23px] justify-start flex">
               <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                 <svg
                   width={24}
@@ -68,7 +68,7 @@ export const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-[23px] flex">
+            <div className="lg:mt-[23px] flex">
               <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                 <svg
                   width={20}
@@ -92,7 +92,7 @@ export const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-[23px] flex">
+            <div className="lg:mt-[23px] flex">
               <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
                 <svg
                   width={18}
@@ -174,7 +174,7 @@ export const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="mt-6  flex flex-col  gap-4 sm:mt-0">
+            <div className="mt-6 hidden  lg:flex flex-col  gap-4 sm:mt-0">
               <p className="text-deutziawhite font-inter text-[18px] font-medium">
                 Download the app
               </p>
