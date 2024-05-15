@@ -60,10 +60,10 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/signIn",
+    signIn: "/sign-In",
   },
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXT_AUTH_URL!,
+  secret: process.env.NEXT_AUTH_SECRET,
 };
