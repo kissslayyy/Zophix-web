@@ -7,7 +7,7 @@ export const SignUpSchema = z.object({
 });
 
 export const VerifySchema = z.object({
-  verifyCode: z.string().min(6, "Verification code must be 6 digit"),
+  verifyCode: z.string().min(5, "Verification code must be 6 digit"),
 });
 
 export const SignInSchema = z.object({

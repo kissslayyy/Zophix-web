@@ -7,7 +7,7 @@ const Offer = () => {
       <div className="  w-full ">
         <div className="py-8 grid grid-cols-1 lg:grid-cols-4 gap-2.5 lg:gap-5 border-t-2 border-b-2 border-pink-600">
           {/* :WEBSITE NAME */}
-          <h2 className="col-span-full lg:col-span-1 inline-flex justify-center items-center text-xl text-gray-100 font-bold">
+          <h2 className="col-span-full lg:col-span-1 inline-flex justify-center items-center text-xl dark:text-gray-100 font-bold">
             Only on Zophix.com
           </h2>
 
@@ -26,7 +26,7 @@ const Offer = () => {
               </svg>
             </div>
             {/* ::Infos */}
-            <p className="md:ml-3 flex flex-col text-center md:text-left text-gray-100">
+            <p className="md:ml-3 flex flex-col text-center md:text-left dark:text-gray-100">
               <span className="text-sm font-bold">
                 FREE 100 days replacement
               </span>
@@ -49,7 +49,7 @@ const Offer = () => {
               </svg>
             </div>
             {/* ::Infos */}
-            <p className="md:ml-3 flex flex-col text-center md:text-left text-gray-100">
+            <p className="md:ml-3 flex flex-col text-center md:text-left dark:text-gray-100">
               <span className="text-sm font-bold">Original Products</span>
               <span className="text-sm font-semibold">
                 (No, Cheap/fakes one!)
@@ -72,7 +72,7 @@ const Offer = () => {
               </svg>
             </div>
             {/* ::Infos */}
-            <p className="md:ml-3 flex flex-col text-center md:text-left text-gray-100">
+            <p className="md:ml-3 flex flex-col text-center md:text-left dark:text-gray-100">
               <span className="text-sm font-bold">Skilled Workers</span>
               <span className="text-sm font-semibold">
                 (You will love. Trust.)
