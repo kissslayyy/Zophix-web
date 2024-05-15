@@ -7,8 +7,8 @@ import User from "@/model/User.model";
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      id: "credential",
-      name: "Credential",
+      id: "credentials",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
@@ -17,10 +17,7 @@ export const authOptions: NextAuthOptions = {
         await dbConnect();
         try {
           const user = await User.findOne({
-            $or: [
-              { email: credentials.identifier },
-              { user: credentials.identifier },
-            ],
+            email: credentials.identifier,
           });
           if (!user) {
             throw new Error("No user found with this email");

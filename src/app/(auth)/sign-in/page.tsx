@@ -90,7 +90,7 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
+            <Button className="w-full bg-black" type="submit">
               Sign In
             </Button>
           </form>
