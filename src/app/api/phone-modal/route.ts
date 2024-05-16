@@ -3,7 +3,6 @@ import PhoneCompany from "@/model/PhoneCompany.model";
 import PhoneModal from "@/model/PhoneModal.model";
 import { type NextRequest } from "next/server";
 import mongoose, { ObjectId } from "mongoose";
-import { User } from "next-auth";
 
 export async function POST(request: Request) {
   await dbConnect();
