@@ -107,6 +107,7 @@ export default function ProfileForm() {
                 <Input
                   placeholder="password"
                   className="text-black"
+                  type="password"
                   {...field}
                 />
               </FormControl>

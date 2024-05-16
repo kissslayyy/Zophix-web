@@ -48,10 +48,10 @@ export default function Page({ params }: { params: { email: string } }) {
       });
       toast.success(response.data.message);
       router.replace("/sign-in");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error while signing up user", error);
 
-      toast.error("Verification  failed");
+      toast.error(error.message);
     }
   };
   return (

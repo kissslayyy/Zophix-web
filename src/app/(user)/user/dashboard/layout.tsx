@@ -1,5 +1,12 @@
+import { Navbar } from "../../_components/Navbar";
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <Navbar />
+      {children}
+    </main>
+  );
 };
 
 export default RootLayout;
