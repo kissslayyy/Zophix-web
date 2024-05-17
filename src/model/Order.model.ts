@@ -17,8 +17,8 @@ const OrderSchema: Schema<IOrder> = new Schema({
   phoneCompany: { type: String, require: true },
   phoneModel: { type: String, require: true },
   phoneNumber: { type: String, require: true },
-  customerName: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  status: { types: String, default: "Pending" },
+  customerName: { type: Schema.Types.ObjectId, ref: "User" },
+  status: { type: String, require: true },
   orderAt: { type: Date, default: Date.now },
 });
 

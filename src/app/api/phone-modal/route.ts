@@ -50,10 +50,7 @@ export async function GET(request: NextRequest) {
 
     const id = new mongoose.Types.ObjectId(query);
     console.log(id);
-    const data = await PhoneCompany.findOne({
-      _id: "6645ddd4f08bcded6fc1ba03",
-    });
-    console.log(data);
+
     const phoneModals = await PhoneModal.aggregate([
       {
         $match: {
