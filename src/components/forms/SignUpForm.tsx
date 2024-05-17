@@ -55,7 +55,7 @@ export default function ProfileForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
         <FormField
           control={form.control}
           name="name"
@@ -116,7 +116,7 @@ export default function ProfileForm() {
             </FormItem>
           )}
         />
-        <Button disabled={isSubmitting} type="submit">
+        <Button disabled={isSubmitting} variant="secondary" type="submit">
           {isSubmitting ? (
             <>
               <Loader2 className="animate-spin mr-2 size-4" /> please wait

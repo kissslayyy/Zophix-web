@@ -5,7 +5,8 @@ export interface IOrder extends Document {
   description: string;
   phoneCompany: string;
   phoneModel: string;
-  customerName: Schema.Types.ObjectId[];
+  phoneNumber: string;
+  customerName: Schema.Types.ObjectId;
   status: string;
   orderAt: Date;
 }
@@ -15,6 +16,7 @@ const OrderSchema: Schema<IOrder> = new Schema({
   description: { type: String, require: true },
   phoneCompany: { type: String, require: true },
   phoneModel: { type: String, require: true },
+  phoneNumber: { type: String, require: true },
   customerName: [{ type: Schema.Types.ObjectId, ref: "User" }],
   status: { types: String, default: "Pending" },
   orderAt: { type: Date, default: Date.now },

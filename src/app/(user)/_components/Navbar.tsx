@@ -1,13 +1,28 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, getProviders } from "next-auth/react";
 import { User } from "next-auth";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { redirect, useRouter } from "next/navigation";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
+import { Bell, CalendarDays } from "lucide-react";
+import { Button } from "@/components/ui/button";
 export const Navbar = () => {
+  const getDate = () => {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = today.getDate();
+    return `${month}/${date}/${year}`;
+  };
   const router = useRouter();
+  const [currentDate, setCurrentDate] = useState(getDate());
+
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -16,54 +31,47 @@ export const Navbar = () => {
     },
   });
   console.log(session);
+  console.log(status);
   const user: User = session?.user;
+
+  if (user?.role === "admin") redirect("/admin/dashboard");
   if (status === "loading") {
     return "Loading or not authenticated...";
   }
 
   return (
-    <header className="bg-gray-50 dark:bg-black">
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <header className="bg-dashboard-bg w-full fixed z-50">
+      <div className="max-w-7xl px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
-              Welcome Back, {user.name}
+          <div className="  text-center sm:text-left">
+            <h1 className="text-base font-bold text-gray-100 sm:text-lg">
+              Welcome Back
             </h1>
-
-            <p className="mt-1.5 text-sm text-gray-500">
-              Let&apos;s write a new blog post! 🎉
-            </p>
           </div>
 
-          <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-            <button
-              className="hidden lg:inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-5 py-3 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring"
-              type="button"
-            >
-              <span className="text-sm font-medium"> View Website </span>
+          <div className="flex gap-6">
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <Button variant="link">
+                  <Bell className="my-auto" />
+                </Button>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80 bg-white text-black">
+                <div className="flex justify-between space-x-4">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">@Notification</h4>
+                    <p className="text-sm">No new Notification</p>
+                    <div className="flex items-center pt-2">
+                      <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+                      <span className="text-xs text-muted-foreground">
+                        {currentDate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </button>
-
-            <button
-              className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
-              type="button"
-            >
-              Create Post
-            </button>
             <button
               className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
               type="button"

@@ -12,9 +12,9 @@ const page = () => {
     - @tailwindcss/forms
 */}
 
-      <section className="bg-white dark:bg-black">
-        <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-          <aside className="relative block h-16   lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+      <section className="bg-white ">
+        <div className="lg:grid lg:min-h-screen  lg:grid-cols-12">
+          <aside className="relative block h-16 bg-blue-500/50  lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
             <Image
               alt=""
               width={500}

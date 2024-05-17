@@ -15,9 +15,10 @@ export const SignInSchema = z.object({
   password: z.string(),
 });
 
-export const OrderRequest = z.object({
+export const OrderRequestSchema = z.object({
   phoneCompany: z.string(),
-  modalName: z.string(),
-  issueLabe: z.string(),
-  issueExplained: z.string().optional(),
+  phoneModel: z.string(),
+  issue: z.string(),
+  description: z.string().optional(),
+  phoneNumber: z.string().min(10).max(10),
 });

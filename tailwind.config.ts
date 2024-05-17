@@ -23,6 +23,9 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        "dashboard-bg": "#242947",
+      },
       keyframes: {
         "caret-blink": {
           "0%,70%,100%": { opacity: "1" },
