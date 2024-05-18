@@ -22,9 +22,21 @@ const UserCard = ({ user }: { user: any }) => {
         </CardHeader>
 
         <CardContent>
-          <Button variant="secondary" asChild>
-            <Link href="/user/dashboard/request-service">Request Service</Link>
-          </Button>
+          {user.role === "customer" ? (
+            <>
+              <Button variant="secondary" asChild>
+                <Link href="/user/dashboard/request-service">
+                  Request Service
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" asChild>
+                <Link href="/admin/dashboard/new-order">Check order</Link>
+              </Button>
+            </>
+          )}
         </CardContent>
       </div>
       <div className="my-auto">

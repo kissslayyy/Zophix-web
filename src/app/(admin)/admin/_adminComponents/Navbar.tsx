@@ -12,6 +12,7 @@ import {
 
 import { Bell, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Loading from "@/app/(user)/user/dashboard/loading";
 export const Navbar = () => {
   const getDate = () => {
     const today = new Date();
@@ -34,16 +35,16 @@ export const Navbar = () => {
   console.log(status);
   const user: User = session?.user;
 
-  if (user?.role === "admin") {
-    redirect("/admin/dashboard");
+  if (user?.role === "customer") {
+    redirect("/user/dashboard");
   }
   if (status === "loading") {
-    return "Loading or not authenticated...";
+    return <Loading />;
   }
 
   return (
     <header className="bg-dashboard-bg w-full fixed z-50">
-      <div className="max-w-7xl px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
+      <div className="max-w-6xl px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="  text-center sm:text-left">
             <h1 className="text-base font-bold text-gray-100 sm:text-lg">
