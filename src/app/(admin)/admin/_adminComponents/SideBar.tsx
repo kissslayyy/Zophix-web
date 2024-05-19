@@ -10,7 +10,7 @@ const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sticky top-0  shrink text-white flex overflow-y-auto  left-0 bg-dashboard-bg h-screen w-[200px] flex-col p-2.5 gap-y-4">
+    <section className="sticky top-0  shrink text-white flex overflow-y-auto  left-0 bg-dashboard-bg h-screen w-[260px] flex-col p-2.5 gap-y-4">
       <div className=" mt-5">
         <Image
           alt="facebook icon"
@@ -22,9 +22,7 @@ const SideBar = () => {
       </div>
       <div className="flex mt-4 flex-1 flex-col gap-6 ">
         {adminSidebarLinks.map((item) => {
-          const isActive =
-            (pathname.includes(item.route) && item.route.length > 1) ||
-            pathname === item.route;
+          const isActive = pathname === item.route;
           return (
             <>
               <Link

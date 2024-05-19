@@ -15,9 +15,21 @@ import {
 import { DataTable } from "../shared/DataTable";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { adminColumns, Order } from "./OrderTableColumns";
+import { ColumnDef } from "@tanstack/react-table";
+import PopUp from "./PopUp";
 
-export default function OrderTable() {
+// This type is used to define the shape of our data.
+// You can use a Zod schema here if you want.
+export type Order = {
+  id: string;
+  status: "pending" | "processing" | "success" | "failed";
+  Phone: string;
+  issue: string;
+  name: string;
+  action: any;
+};
+
+const OrderTable = () => {
   const [result, setResult] = useState<Order[]>();
   const oderResult = () => {
     axios
@@ -29,10 +41,43 @@ export default function OrderTable() {
         console.log(error);
       });
   };
+  const adminColumns: ColumnDef<Order>[] = [
+    {
+      id: "Name",
+      accessorKey: "customerName.name",
+      header: "Name",
+    },
+
+    {
+      id: "Phone",
+      accessorKey: "phoneNumber",
+      header: "Phone",
+    },
+    {
+      id: "Issue",
+      accessorKey: "issue",
+      header: "Issue",
+    },
+    {
+      id: "Status",
+      accessorKey: "status",
+      header: "Status",
+    },
+
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const blog = row.original;
+
+        return <PopUp oderResult={oderResult} blog={blog} />;
+      },
+    },
+  ];
   useEffect(() => {
     oderResult();
   }, []);
-  console.log(result);
+  // console.log(result);
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
@@ -54,4 +99,5 @@ export default function OrderTable() {
       </CardContent>
     </Card>
   );
-}
+};
+export default OrderTable;

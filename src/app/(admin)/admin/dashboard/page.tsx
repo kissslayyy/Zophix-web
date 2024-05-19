@@ -26,7 +26,6 @@ const Page = () => {
         <UserCard user={user} />
       </div>
       <div className=" my-4  p-4 ">
-        <h3 className="text-2xl font-semibold pb-1">Past Services</h3>
         <div className="w-[960px] ">
           <OrderTable />
         </div>

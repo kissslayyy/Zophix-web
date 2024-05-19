@@ -29,7 +29,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
-          <Toaster theme="system" richColors position="top-right" />
+          <Toaster theme="light" richColors position="top-right" />
           <SpeedInsights />
         </body>
       </AuthProvider>
