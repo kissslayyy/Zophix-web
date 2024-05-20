@@ -57,7 +57,7 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
   };
 
   return (
-    <div>
+    <div className="">
       <Dialog open={open} onOpenChange={setOpen}>
         <DropdownMenu>
           <DropdownMenuTrigger className="bg-white" asChild>
@@ -71,35 +71,20 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
             <DropdownMenuSeparator />
             <>
               <DropdownMenuItem>
-                <Link href={`/dashboard/edit-blog/${blog._id}`}>Edit</Link>
+                <Link href={`/dashboard/edit-blog/${blog._id}`}>View</Link>
               </DropdownMenuItem>
             </>
             <DropdownMenuSeparator />
             <DialogTrigger asChild>
               <DropdownMenuItem>
-                <span>Delete</span>
+                <span>Update</span>
               </DropdownMenuItem>
             </DialogTrigger>
           </DropdownMenuContent>
         </DropdownMenu>
         <DialogContent className="grid grid-cols-1 bg-white text-slate-500 justify-items-center ">
           <DialogHeader>
-            <DialogTitle>
-              <svg
-                className="mx-auto h-20 w-20 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </DialogTitle>
+            <DialogTitle></DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-1 items-center gap-4">

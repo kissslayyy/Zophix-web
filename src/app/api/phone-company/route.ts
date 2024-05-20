@@ -54,3 +54,33 @@ export async function GET(request: Request) {
     );
   }
 }
+
+export async function DELETE(request: Request) {
+  await dbConnect();
+  try {
+    const { id } = await request.json();
+    const phoneCompany = await PhoneCompany.findById(id);
+    if (!phoneCompany) {
+      return Response.json({
+        success: false,
+        message: "Phone company not found",
+      });
+    }
+    await PhoneCompany.deleteOne({ _id: id });
+    return Response.json({
+      success: true,
+      message: "Phone company deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error user", error);
+    return Response.json(
+      {
+        success: false,
+        message: "Error deleting phone company",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}

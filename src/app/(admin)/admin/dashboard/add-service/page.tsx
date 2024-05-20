@@ -105,7 +105,7 @@ export default function AddService() {
         return (
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="update">Delete</Button>
+              <Button variant="delete">Delete</Button>
             </DialogTrigger>
             <DialogContent className="bg-white text-black">
               <DialogHeader>
@@ -122,7 +122,7 @@ export default function AddService() {
                   </Button>
                 </DialogClose>
                 <Button
-                  variant="update"
+                  variant="delete"
                   onClick={() => deleteService(serviceSlug)}
                   className="bg-red-500"
                 >
