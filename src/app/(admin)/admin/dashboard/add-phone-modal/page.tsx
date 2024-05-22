@@ -50,30 +50,51 @@ export type Order = {
   name: string;
   action: any;
   serviceSlug: string;
+  phoneCompany: string;
+  phoneModal: string;
 };
 
 const FormSchema = z.object({
-  phoneCompany: z.string().min(2, {
+ 
+  phoneModal: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
 });
 
-export default function AddService() {
+export default function AddPhoneModal() {
   const [serviceData, setServiceData] = useState<Order[]>();
+  const [modalNames, setModalNames] = useState<Order[]>();
+  const [selectedBrand, setSelectedBrand] = useState<string>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      phoneCompany: "",
+     
+      phoneModal: "",
+      
     },
   });
+  const getPhoneModal = (id: string) => {
+    
+    setSelectedBrand(id);
+    axios
+      .get(`/api/phone-modal/?brand=${id}`)
+      .then((response) => {
+        setModalNames(response.data.data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const deleteService = (id: string) => {
     axios
-      .delete(`/api/phone-company`, { data: { id } })
+      .delete(`/api/phone-modal`, { data: { id } })
       .then((response) => {
         toast.success(response.data.message);
-        getService();
+
+        getPhoneModal(selectedBrand!);
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +106,7 @@ export default function AddService() {
       .get(`/api/phone-company`)
       .then((response) => {
         setServiceData(response.data.data);
-        console.log(response.data.data);
+      
       })
       .catch((error) => {
         console.log(error);
@@ -94,15 +115,15 @@ export default function AddService() {
 
   const serviceColumns: ColumnDef<Order>[] = [
     {
-      id: "phoneCompany",
-      accessorKey: "phoneCompany",
+      id: "phoneModal",
+      accessorKey: "phoneModal",
       header: "Name",
     },
     {
       id: "Action",
       cell: ({ row }) => {
+        
         const { _id } = row.original;
-
         return (
           <Dialog>
             <DialogTrigger asChild>
@@ -137,57 +158,86 @@ export default function AddService() {
     },
   ];
 
-  useEffect(() => {
-    getService();
-  }, []);
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post<APiResponse>(
-        `/api/phone-company`,
-        values
+      const response = await axios.post(
+        `/api/phone-modal/`,
+    {
+      phoneModal:values.phoneModal,
+      brand:selectedBrand,
+    }
       );
       toast.success(response.data.message);
-      getService();
       setIsSubmitting(false);
+      getPhoneModal(selectedBrand!)
+      form.reset()
     } catch (error) {
       console.error("Error while adding service", error);
       setIsSubmitting(false);
       toast.error("Adding service failed");
     }
   };
+  useEffect(() => {
+    getService();
+  }, []);
 
   return (
     <section className="flex justify-center px-4 my-auto gap-4 flex-row-reverse">
       <Card className="w-full">
         <CardHeader className="flex flex-row items-center">
           <div className="grid gap-2">
-            <CardTitle>Total Service</CardTitle>
+            <CardTitle>Phone Models</CardTitle>
             <CardDescription>
-              Available service from your store.
+              Available phone models from your store.
             </CardDescription>
           </div>
         </CardHeader>
         <CardContent>
-          {serviceData && (
-            <DataTable data={serviceData} columns={serviceColumns} />
+          {modalNames && (
+            <DataTable data={modalNames.toReversed()} columns={serviceColumns} />
           )}
         </CardContent>
       </Card>
       <Card className="w-full h-fit">
         <CardHeader className="flex flex-row items-center">
           <div className="grid gap-2">
-            <CardTitle>Add new service</CardTitle>
-            <CardDescription>Add phone repairing service.</CardDescription>
+            <CardTitle>Add new phone modal</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <select
+                name="HeadlineAct"
+                id="HeadlineAct"
+                className=" inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl   leading-none text-black shadow-[0_2px_10px]  shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+                onChange={(e) => {
+                  getPhoneModal(e.target.value);
+                }}
+              >
+                <option className="py-4 text-base  " value="">
+                  Select a Your Brand
+                </option>
+                {serviceData &&
+                  serviceData.map((e, i) => {
+                    return (
+                      <>
+                        <option
+                          key={e._id}
+                          className="w-full  text-xl "
+                          value={e._id}
+                        >
+                          {e.phoneCompany}
+                        </option>
+                      </>
+                    );
+                  })}
+              </select>
               <FormField
                 control={form.control}
-                name="phoneCompany"
+                name="phoneModal"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Service Name</FormLabel>

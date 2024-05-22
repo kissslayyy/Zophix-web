@@ -40,12 +40,12 @@ export const adminSidebarLinks: SidebarLink[] = [
   },
   {
     imgURL: "/shopping-cart.svg",
-    route: "/admin/dashboard/add-phone-modal",
+    route: "/admin/dashboard/add-phone-brand",
     label: "Add Phone Brand",
   },
   {
     imgURL: "/shopping-cart.svg",
-    route: "/admin/dashboard/track-order",
+    route: "/admin/dashboard/add-phone-modal",
     label: "Add Phone Modal",
   },
   {
