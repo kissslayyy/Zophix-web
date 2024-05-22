@@ -7,11 +7,11 @@ export async function GET(request: Request) {
   // Connect to the database
   await dbConnect();
 
-  // Extract the ID from the URL
-  const url = new URL(request.url);
-  const id = url.pathname.split("/").pop();
-
-  if (id && ObjectId.isValid(id)) {
+  // Extract the ID from the URL path
+  const urlParts = request.url.split('/');
+  const id = urlParts[urlParts.length - 1];
+  console.log(id, "inside server")
+  if (ObjectId.isValid(id)) {
     try {
       // Fetch the order by ID
       const order = await Order.findById(id).populate({

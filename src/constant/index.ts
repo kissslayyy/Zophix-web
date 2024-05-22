@@ -1,8 +1,10 @@
-export interface SidebarLink {
+export type SidebarLink = {
   imgURL: string;
   route: string;
   label: string;
-}
+  subLinks?: { label: string; route: string }[];
+};
+
 
 export const sidebarLinks: SidebarLink[] = [
   {
@@ -34,31 +36,32 @@ export const adminSidebarLinks: SidebarLink[] = [
     label: "Home",
   },
   {
-    imgURL: "/shopping-cart.svg",
+    imgURL: "/wrench.svg",
     route: "/admin/dashboard/add-service",
     label: "Add Service",
   },
   {
-    imgURL: "/shopping-cart.svg",
+    imgURL: "/building-2.svg",
     route: "/admin/dashboard/add-phone-brand",
     label: "Add Phone Brand",
   },
   {
-    imgURL: "/shopping-cart.svg",
+    imgURL: "/smartphone.svg",
     route: "/admin/dashboard/add-phone-modal",
     label: "Add Phone Modal",
   },
+  
   {
     imgURL: "/shopping-cart.svg",
-    route: "/admin/dashboard/track-order",
-    label: "New Order",
+    route: "/admin/dashboard/order",
+    label: "Order",
+    subLinks: [
+      { label: "Total Orders", route: "/admin/dashboard/total-order" },
+      { label: "New Orders", route: "/admin/dashboard/new-order" },
+      { label: "Working Orders", route: "/admin/dashboard/working-order" },
+      { label: "Completed Orders", route: "/admin/dashboard/completed-order" },
+    ],
   },
-  {
-    imgURL: "/shopping-cart.svg",
-    route: "/admin/dashboard/track-order",
-    label: "Total Order",
-  },
-
   {
     imgURL: "/user.svg",
     route: "/admin/dashboard/profile",

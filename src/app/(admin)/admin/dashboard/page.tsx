@@ -27,7 +27,7 @@ const Page = () => {
       </div>
       <div className=" my-4  p-4 ">
         <div className="w-[960px] ">
-          <OrderTable />
+          <OrderTable title="Latest order" desc="latest 10 order" />
         </div>
       </div>
     </section>
