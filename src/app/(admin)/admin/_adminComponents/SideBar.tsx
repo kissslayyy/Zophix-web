@@ -8,7 +8,9 @@ import React from "react";
 
 const SideBar = () => {
   const pathname = usePathname();
-  const [openDropdowns, setOpenDropdowns] = useState<{ [key: string]: boolean }>({});
+  const [openDropdowns, setOpenDropdowns] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const toggleDropdown = (label: string) => {
     setOpenDropdowns((prev) => ({
@@ -34,27 +36,61 @@ const SideBar = () => {
 
           return (
             <div key={item.route} className="flex flex-col">
-              <button
-                onClick={() => item.subLinks && toggleDropdown(item.label)}
-                className={`flex items-center justify-start gap-4 bg-transparent p-2 ${
-                  isActive ? "bg-white text-black rounded-lg" : ""
-                }`}
-              >
-                <Image
-                  src={item.imgURL}
-                  alt={item.label}
-                  width={20}
-                  height={20}
-                  className={`${isActive ? "" : "invert"}`}
-                />
-                <p className={`max-lg:hidden ${isActive ? "base-bold" : "base-medium"}`}>
-                  {item.label}
-                </p>
-              </button>
+              {item.subLinks ? (
+                <button
+                  onClick={() => item.subLinks && toggleDropdown(item.label)}
+                  className={`flex items-center justify-start gap-4 bg-transparent p-2 ${
+                    isActive ? "bg-white text-black rounded-lg" : ""
+                  }`}
+                >
+                  <Image
+                    src={item.imgURL}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className={`${isActive ? "" : "invert"}`}
+                  />
+                  <p
+                    className={`max-lg:hidden ${
+                      isActive ? "base-bold" : "base-medium"
+                    }`}
+                  >
+                    {item.label}
+                  </p>
+                </button>
+              ) : (
+                <>
+                  <Link
+                    href={item.route}
+                    className={`flex items-center justify-start gap-4 bg-transparent p-2 ${
+                      isActive ? "bg-white text-black rounded-lg" : ""
+                    }`}
+                  >
+                    <Image
+                      src={item.imgURL}
+                      alt={item.label}
+                      width={20}
+                      height={20}
+                      className={`${isActive ? "" : "invert"}`}
+                    />
+                    <p
+                      className={`max-lg:hidden ${
+                        isActive ? "base-bold" : "base-medium"
+                      }`}
+                    >
+                      {item.label}
+                    </p>
+                  </Link>
+                </>
+              )}
               {item.subLinks && openDropdowns[item.label] && (
                 <div className="ml-6 mt-2 flex flex-col gap-2">
                   {item.subLinks.map((subLink) => (
-                    <Link key={subLink.route} href={subLink.route} className="text-sm">
+                    <Link
+                      key={subLink.route}
+                      href={subLink.route}
+                      className="text-sm"
+                    >
                       {subLink.label}
                     </Link>
                   ))}

@@ -6,6 +6,7 @@ import AuthProvider from "@/context/AuthProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata: Metadata = {
   title: "Zophix",
@@ -27,6 +28,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+                    <NextTopLoader />
+
             {children}
           </ThemeProvider>
           <Toaster theme="light" richColors position="top-right" />
