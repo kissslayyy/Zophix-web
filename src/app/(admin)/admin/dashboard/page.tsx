@@ -8,6 +8,7 @@ import OrderTable from "@/components/admin/OrderTable";
 import { AddPhoneBrand } from "../_adminComponents/shortcuts/AddPhoneBrand";
 import { TotalUser } from "../_adminComponents/shortcuts/TotalUser";
 import { TotalOrder } from "../_adminComponents/shortcuts/TotalOrder";
+import { AddOrders } from "../_adminComponents/shortcuts/AddOrders";
 
 const Page = () => {
   const { data: session, status } = useSession({
@@ -25,7 +26,12 @@ const Page = () => {
   return (
     <section className="m-4 gap-4 flex">
       <div className="rounded-2xl flex flex-col   text-black">
-        <UserCard user={user} />
+        <div className="flex my-auto gap-4">
+          <UserCard user={user} />
+          <div className="my-auto">
+            <AddOrders />
+          </div>
+        </div>
 
         <div className=" my-4  p-4 ">
           <div className="w-[760px] ">

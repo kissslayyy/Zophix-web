@@ -55,7 +55,6 @@ export type Order = {
 };
 
 const FormSchema = z.object({
- 
   phoneModal: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
@@ -69,19 +68,15 @@ export default function AddPhoneModal() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-     
       phoneModal: "",
-      
     },
   });
   const getPhoneModal = (id: string) => {
-    
     setSelectedBrand(id);
     axios
       .get(`/api/phone-modal/?brand=${id}`)
       .then((response) => {
         setModalNames(response.data.data);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -106,7 +101,6 @@ export default function AddPhoneModal() {
       .get(`/api/phone-company`)
       .then((response) => {
         setServiceData(response.data.data);
-      
       })
       .catch((error) => {
         console.log(error);
@@ -122,7 +116,6 @@ export default function AddPhoneModal() {
     {
       id: "Action",
       cell: ({ row }) => {
-        
         const { _id } = row.original;
         return (
           <Dialog>
@@ -158,21 +151,17 @@ export default function AddPhoneModal() {
     },
   ];
 
-
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post(
-        `/api/phone-modal/`,
-    {
-      phoneModal:values.phoneModal,
-      brand:selectedBrand,
-    }
-      );
+      const response = await axios.post(`/api/phone-modal/`, {
+        phoneModal: values.phoneModal,
+        brand: selectedBrand,
+      });
       toast.success(response.data.message);
       setIsSubmitting(false);
-      getPhoneModal(selectedBrand!)
-      form.reset()
+      getPhoneModal(selectedBrand!);
+      form.reset();
     } catch (error) {
       console.error("Error while adding service", error);
       setIsSubmitting(false);
@@ -196,7 +185,10 @@ export default function AddPhoneModal() {
         </CardHeader>
         <CardContent>
           {modalNames && (
-            <DataTable data={modalNames.toReversed()} columns={serviceColumns} />
+            <DataTable
+              data={modalNames.toReversed()}
+              columns={serviceColumns}
+            />
           )}
         </CardContent>
       </Card>
@@ -240,13 +232,11 @@ export default function AddPhoneModal() {
                 name="phoneModal"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Service Name</FormLabel>
+                    <FormLabel>Phone Modal</FormLabel>
                     <FormControl>
-                      <Input placeholder="Add service name" {...field} />
+                      <Input placeholder="Add modal name" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+
                     <FormMessage />
                   </FormItem>
                 )}

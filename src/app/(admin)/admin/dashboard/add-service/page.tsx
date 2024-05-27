@@ -190,9 +190,7 @@ export default function AddService() {
                     <FormControl>
                       <Input placeholder="Add service name" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+
                     <FormMessage />
                   </FormItem>
                 )}

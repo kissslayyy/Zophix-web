@@ -5,7 +5,6 @@ export type SidebarLink = {
   subLinks?: { label: string; route: string }[];
 };
 
-
 export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/home.svg",
@@ -50,7 +49,12 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/dashboard/add-phone-modal",
     label: "Add Phone Modal",
   },
-  
+  {
+    imgURL: "/smartphone.svg",
+    route: "/admin/dashboard/add-pricing",
+    label: "Add Pricing",
+  },
+
   {
     imgURL: "/shopping-cart.svg",
     route: "/admin/dashboard/order",

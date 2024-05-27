@@ -163,10 +163,8 @@ export default function AddPhoneBrand() {
       <Card className="w-full">
         <CardHeader className="flex flex-row items-center">
           <div className="grid gap-2">
-            <CardTitle>Total Service</CardTitle>
-            <CardDescription>
-              Available service from your store.
-            </CardDescription>
+            <CardTitle className="font-normal">Total modal </CardTitle>
+            <CardDescription>Available modal from your store.</CardDescription>
           </div>
         </CardHeader>
         <CardContent>
@@ -178,8 +176,8 @@ export default function AddPhoneBrand() {
       <Card className="w-full h-fit">
         <CardHeader className="flex flex-row items-center">
           <div className="grid gap-2">
-            <CardTitle>Add new service</CardTitle>
-            <CardDescription>Add phone repairing service.</CardDescription>
+            <CardTitle> Phone Brand/Company</CardTitle>
+            <CardDescription>Add brand/company.</CardDescription>
           </div>
         </CardHeader>
         <CardContent>
@@ -190,13 +188,11 @@ export default function AddPhoneBrand() {
                 name="phoneCompany"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Service Name</FormLabel>
+                    <FormLabel>Phone Brand/Company</FormLabel>
                     <FormControl>
-                      <Input placeholder="Add service name" {...field} />
+                      <Input placeholder="Add Phone Brand/Company" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+
                     <FormMessage />
                   </FormItem>
                 )}
