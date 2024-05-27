@@ -73,11 +73,8 @@ export function AddOrders() {
             </dt>
 
             <dd className="mt-1 text-3xl font-semibold leading-9 text-gray-900">
-              <Button
-                variant="secondary"
-                onClick={() => redirect("/admin/dashboard/create-order")}
-              >
-                Create
+              <Button variant="secondary">
+                <Link href="/admin/dashboard/create-order">Create</Link>
               </Button>
             </dd>
           </dl>

@@ -71,7 +71,12 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
             <DropdownMenuSeparator />
             <>
               <DropdownMenuItem>
-                <Link target="_blank" href={`/admin/dashboard/order/${blog._id}`}>View</Link>
+                <Link
+                  target="_blank"
+                  href={`/admin/dashboard/order/${blog._id}`}
+                >
+                  View
+                </Link>
               </DropdownMenuItem>
             </>
             <DropdownMenuSeparator />

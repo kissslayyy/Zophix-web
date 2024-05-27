@@ -15,6 +15,10 @@ export const SignInSchema = z.object({
   password: z.string(),
 });
 
+export const requestPasswordReset = z.object({
+  email: z.string().email(),
+});
+
 export const OrderRequestSchema = z.object({
   phoneCompany: z.string(),
   phoneModel: z.string(),

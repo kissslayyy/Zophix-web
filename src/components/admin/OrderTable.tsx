@@ -29,7 +29,7 @@ export type Order = {
   action: any;
 };
 
-const OrderTable = ({title, desc}:{title:string,desc:string}) => {
+const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
   const [result, setResult] = useState<Order[]>();
   const oderResult = () => {
     axios
@@ -83,9 +83,7 @@ const OrderTable = ({title, desc}:{title:string,desc:string}) => {
       <CardHeader className="flex flex-row items-center">
         <div className="grid gap-2">
           <CardTitle>{title}</CardTitle>
-          <CardDescription>
-            {desc}.
-          </CardDescription>
+          <CardDescription>{desc}.</CardDescription>
         </div>
         <Button asChild size="sm" className="ml-auto gap-1">
           <Link href="#">
@@ -95,7 +93,7 @@ const OrderTable = ({title, desc}:{title:string,desc:string}) => {
         </Button>
       </CardHeader>
       <CardContent>
-        {result &&  <DataTable data={result} columns={adminColumns} />}
+        {result && <DataTable data={result} columns={adminColumns} />}
       </CardContent>
     </Card>
   );
