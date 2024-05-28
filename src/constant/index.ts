@@ -13,17 +13,17 @@ export const sidebarLinks: SidebarLink[] = [
   },
   {
     imgURL: "/shopping-cart.svg",
-    route: "/user/track-order",
+    route: "/user/dashboard/order",
     label: "Order",
   },
   {
     imgURL: "/user.svg",
-    route: "/user/profile",
+    route: "/user/dashboard/profile",
     label: "Profile",
   },
   {
     imgURL: "/settings.svg",
-    route: "/user/setting",
+    route: "/user/dashboard/setting",
     label: "Setting",
   },
 ];

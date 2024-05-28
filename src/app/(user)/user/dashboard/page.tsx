@@ -1,17 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import UserCard from "../../_components/UserCard";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
 import { redirect, useRouter } from "next/navigation";
 import Loading from "./loading";
-import { Payment, columns } from "../../_components/columns";
 import { DataTable } from "@/components/shared/DataTable";
+import axios from "axios";
+import { Order } from "@/components/admin/OrderTable";
+import { ColumnDef } from "@tanstack/react-table";
+import PopUp from "@/components/admin/PopUp";
 
 const Page = () => {
+  const [result, setResult] = useState<Order[] | undefined>([]);
+  const oderResult = () => {
+    axios
+      .get("/api/get-orders")
+      .then((response) => {
+        setResult(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const router = useRouter();
-
+  useEffect(() => {
+    oderResult();
+  }, []);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -21,30 +37,46 @@ const Page = () => {
   });
   console.log(session);
   console.log(status);
+  const adminColumns: ColumnDef<Order>[] = [
+    {
+      id: "Name",
+      accessorKey: "customerName.name",
+      header: "Name",
+    },
+
+    {
+      id: "Phone",
+      accessorKey: "phoneNumber",
+      header: "Phone",
+    },
+    {
+      id: "Issue",
+      accessorKey: "issue",
+      header: "Issue",
+    },
+    {
+      id: "Status",
+      accessorKey: "status",
+      header: "Status",
+    },
+
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const blog = row.original;
+
+        return <PopUp oderResult={oderResult} blog={blog} />;
+      },
+    },
+  ];
   const user: User = session?.user;
 
   if (user?.role === "admin") redirect("/admin/dashboard");
   if (status === "loading") {
     return <Loading />;
   }
-  const payments: Payment[] = [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      issue: "battery damage",
-      email: "m@example.com",
-    },
-    {
-      id: "489e1d42",
-      amount: 125,
-      status: "processing",
-      issue: "screen damage",
 
-      email: "example@gmail.com",
-    },
-    // ...
-  ];
   return (
     <section className="m-4 gap-4 ">
       <div className="rounded-2xl flex flex-col items-start  text-black">
@@ -53,7 +85,7 @@ const Page = () => {
       <div className=" my-4  p-4 ">
         <h3 className="text-2xl font-semibold pb-1">Past Services</h3>
         <div className="w-[960px] ">
-          <DataTable columns={columns} data={payments} />
+          {result && <DataTable columns={adminColumns} data={result} />}
         </div>
       </div>
     </section>

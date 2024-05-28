@@ -22,9 +22,7 @@ const LeftSideBar = () => {
       </div>
       <div className="flex mt-4 flex-1 flex-col gap-6 ">
         {sidebarLinks.map((item) => {
-          const isActive =
-            (pathname.includes(item.route) && item.route.length > 1) ||
-            pathname === item.route;
+          const isActive = pathname === item.route;
           return (
             <>
               <Link
