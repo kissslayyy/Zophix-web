@@ -53,9 +53,9 @@ export default function Page({ params }: { params: { email: string } }) {
     }
   };
   return (
-    <div className="flex justify-center  items-center lg:min-h-screen bg-gray-500">
-    <div className="w-full max-w-fit  grid lg:grid-cols-2 p-8 space-y-8  text-black bg-white lg:rounded-lg ">
-      <div className="w-full h-full max-w-xs p-8   ">
+    <div className="flex justify-center   items-center lg:min-h-screen bg-gray-500">
+    <div className="w-full max-w-fit gap-0  grid grid-cols-1 p-8  content-center text-black bg-white lg:rounded-lg ">
+      <div className="size-3/4   mx-auto  ">
         <Image
           src="/logIn.svg"
           alt="login"
@@ -64,13 +64,13 @@ export default function Page({ params }: { params: { email: string } }) {
           className="object-contain size-full"
         />
       </div>
-      <div>
+      <div className="my-auto ">
         <div className="text-start">
           <h1 className="text-xl font-bold tracking-tight lg:text-3xl mb-4">
             OTP Verification
           </h1>
         </div>
-          <div className="grid gap-4">
+          <div className=" ">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
