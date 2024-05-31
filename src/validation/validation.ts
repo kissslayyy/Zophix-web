@@ -9,7 +9,10 @@ export const SignUpSchema = z.object({
 export const VerifySchema = z.object({
   verifyCode: z.string().min(5, "Verification code must be 6 digit"),
 });
-
+export const ResetPasswordSchema = z.object({
+  verifyCode: z.string().min(5, "Verification code must be 5 digit"),
+  newPassword: z.string().min(6, "password  must be 6 letters"),
+});
 export const SignInSchema = z.object({
   identifier: z.string(),
   password: z.string(),

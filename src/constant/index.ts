@@ -16,11 +16,7 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/user/dashboard/order",
     label: "Order",
   },
-  {
-    imgURL: "/user.svg",
-    route: "/user/dashboard/profile",
-    label: "Profile",
-  },
+  
   {
     imgURL: "/settings.svg",
     route: "/user/dashboard/setting",

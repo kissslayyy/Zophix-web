@@ -64,7 +64,7 @@ const Page = () => {
       });
   };
   const getPhoneModal = (id: string) => {
-    console.log(id, "yesy");
+    
     axios
       .get(`/api/phone-modal/?brand=${id}`)
       .then((response) => {

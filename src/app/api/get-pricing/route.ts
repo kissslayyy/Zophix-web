@@ -10,12 +10,13 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const phoneCompanyId = url.searchParams.get("phoneCompany");
   const phoneModalId = url.searchParams.get("phoneModal");
+  const serviceTypeName = url.searchParams.get("serviceType");
 
   if (!phoneCompanyId || !phoneModalId) {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "phoneCompany and phoneModal  are required",
+        message: "phoneCompany and phoneModal are required",
       }),
       {
         status: 400,
@@ -25,10 +26,30 @@ export async function GET(request: Request) {
   }
 
   try {
-    const prices = await Price.find({
+    const query: any = {
       phoneCompany: phoneCompanyId,
       phoneModal: phoneModalId,
-    })
+    };
+
+    if (serviceTypeName) {
+      const service = await Service.findOne({ serviceName: serviceTypeName }).select("_id");
+      if (service) {
+        query.serviceType = service._id;
+      } else {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            message: "Invalid serviceType",
+          }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+
+    const prices = await Price.find(query)
       .populate({
         path: "phoneCompany",
         model: PhoneCompany,

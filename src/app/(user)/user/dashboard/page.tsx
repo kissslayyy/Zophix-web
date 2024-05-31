@@ -11,6 +11,7 @@ import axios from "axios";
 import { Order } from "@/components/admin/OrderTable";
 import { ColumnDef } from "@tanstack/react-table";
 import PopUp from "@/components/admin/PopUp";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const [result, setResult] = useState<Order[] | undefined>([]);
@@ -66,7 +67,13 @@ const Page = () => {
       cell: ({ row }) => {
         const blog = row.original;
 
-        return <PopUp oderResult={oderResult} blog={blog} />;
+        return (
+          <>
+          <Button>
+          Download
+          </Button>
+          </>
+        );
       },
     },
   ];

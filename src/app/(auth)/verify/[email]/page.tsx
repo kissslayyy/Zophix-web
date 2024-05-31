@@ -1,14 +1,5 @@
 "use client";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import { VerifySchema } from "@/validation/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,13 +25,18 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import Image from "next/image";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Page({ params }: { params: { email: string } }) {
+  const [isSubmitting, setIsSubmitting]= useState(false)
   const router = useRouter();
   const form = useForm<z.infer<typeof VerifySchema>>({
     resolver: zodResolver(VerifySchema),
   });
   const onSubmit = async (data: z.infer<typeof VerifySchema>) => {
+    setIsSubmitting(true)
     try {
       const response = await axios.post(`/api/verify-code`, {
         email: decodeURIComponent(params.email),
@@ -48,22 +44,32 @@ export default function Page({ params }: { params: { email: string } }) {
       });
       toast.success(response.data.message);
       router.replace("/sign-in");
+      setIsSubmitting(false)
     } catch (error: any) {
       console.error("Error while signing up user", error);
 
-      toast.error(error.message);
+      toast.error('failed to verify ');
+      setIsSubmitting(false)
     }
   };
   return (
-    <div className="grid grid-cols-1 h-[75vh] lg:h-screen justify-items-center content-center  ">
-      <Card className="my-auto max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Otp</CardTitle>
-          <CardDescription>
-            Enter your otp below to verify to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className="flex justify-center  items-center lg:min-h-screen bg-gray-500">
+    <div className="w-full max-w-fit  grid lg:grid-cols-2 p-8 space-y-8  text-black bg-white lg:rounded-lg ">
+      <div className="w-full h-full max-w-xs p-8   ">
+        <Image
+          src="/logIn.svg"
+          alt="login"
+          width={220}
+          height={220}
+          className="object-contain size-full"
+        />
+      </div>
+      <div>
+        <div className="text-start">
+          <h1 className="text-xl font-bold tracking-tight lg:text-3xl mb-4">
+            OTP Verification
+          </h1>
+        </div>
           <div className="grid gap-4">
             <Form {...form}>
               <form
@@ -78,18 +84,30 @@ export default function Page({ params }: { params: { email: string } }) {
                       <FormLabel>One-Time Password</FormLabel>
                       <FormControl>
                         <InputOTP
+                        disabled={isSubmitting}
                           maxLength={5}
-                          className="border-black border bg-black"
+                          className="border-black w-full border text-black bg-black"
                           {...field}
                         >
                           <InputOTPGroup>
                             <InputOTPSlot index={0} />
-                            <InputOTPSlot index={1} />
-                            <InputOTPSlot index={2} />
-
-                            <InputOTPSlot index={3} />
-                            <InputOTPSlot index={4} />
                           </InputOTPGroup>
+                            <InputOTPSeparator />
+                          <InputOTPGroup>
+                            <InputOTPSlot index={1} />
+                          </InputOTPGroup>
+                            <InputOTPSeparator />
+                          <InputOTPGroup>
+                            <InputOTPSlot index={2} />
+                          </InputOTPGroup>
+                            <InputOTPSeparator />
+                        <InputOTPGroup>
+                            <InputOTPSlot index={3} />
+                        </InputOTPGroup>
+                            <InputOTPSeparator />
+                        <InputOTPGroup>
+                            <InputOTPSlot index={4} />
+                        </InputOTPGroup>
                         </InputOTP>
                       </FormControl>
 
@@ -97,14 +115,25 @@ export default function Page({ params }: { params: { email: string } }) {
                     </FormItem>
                   )}
                 />
-
-                <Button type="submit">Submit</Button>
+                 
+                 
+                  <div className="flex lg:justify-end lg:pt-4">
+                <Button disabled={isSubmitting}  variant="update" type="submit">
+                  {isSubmitting ?<>
+                  <Loader2 className=" size-4 animate-spin"/>
+                  Submitting
+                  </>:<>
+                  
+                  Submit
+                  </>}
+                  </Button>
+                    </div>  
               </form>
             </Form>
           </div>
           <div className="mt-4 text-center text-sm"></div>
-        </CardContent>
-      </Card>
+          </div>
+      </div>
     </div>
   );
 }
