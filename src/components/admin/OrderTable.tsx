@@ -33,7 +33,7 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
   const [result, setResult] = useState<Order[]>();
   const oderResult = () => {
     axios
-      .get("/api/get-orders")
+      .get(`/api/get-orders?timestamp=${new Date().getTime()}`)
       .then((response) => {
         setResult(response.data.data);
       })
