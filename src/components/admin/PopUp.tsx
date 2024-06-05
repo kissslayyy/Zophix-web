@@ -43,8 +43,8 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
       .then((response) => {
         setState(false);
         toast.success(response.data.message);
-        router.replace("/admin/dashboard");
         oderResult();
+        console.log("order result function");
         setOpen(false);
       })
       .catch((error) => {
