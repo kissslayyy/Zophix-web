@@ -33,7 +33,7 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
   const [result, setResult] = useState<Order[]>();
   const oderResult = () => {
     axios
-      .get(`/api/get-orders?timestamp=${new Date().getTime()}`)
+      .get(`/api/get-orders`)
       .then((response) => {
         setResult(response.data.data);
       })
@@ -76,7 +76,7 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
   ];
   useEffect(() => {
     oderResult();
-  }, []);
+  }, [result]);
   // console.log(result);
   return (
     <Card className="xl:col-span-2">
