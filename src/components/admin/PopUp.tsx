@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -55,7 +55,9 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
         console.error(error);
       });
   };
-
+  useEffect(() => {
+    oderResult();
+  }, []);
   return (
     <div className="">
       <Dialog open={open} onOpenChange={setOpen}>
