@@ -55,9 +55,7 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
         console.error(error);
       });
   };
-  useEffect(() => {
-    oderResult();
-  }, []);
+
   return (
     <div className="">
       <Dialog open={open} onOpenChange={setOpen}>
