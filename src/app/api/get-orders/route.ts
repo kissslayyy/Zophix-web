@@ -20,7 +20,10 @@ export async function GET(request: Request) {
       }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store", // Prevent caching
+        },
       }
     );
   } catch (error) {
@@ -32,7 +35,10 @@ export async function GET(request: Request) {
       }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store", // Prevent caching
+        },
       }
     );
   }
