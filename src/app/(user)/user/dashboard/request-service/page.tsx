@@ -129,7 +129,7 @@ const Page = () => {
         issue: service,
         phoneCompany: selectedBrand,
         phoneModel: selectedModal,
-        status: "str",
+        status: str,
         phoneNumber: values.phoneNumber,
       });
       toast.success("Order Sent successfully");
