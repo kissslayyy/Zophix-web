@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MoreHorizontal } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,18 +23,16 @@ import {
 import Link from "next/link";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
 
-const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
+const PopUp = ({ blog, oderResult }: { blog: any; oderResult: () => void }) => {
   console.log(blog, "blog");
-  const router = useRouter();
   const [state, setState] = useState(false);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
 
-  const updateStatus = () => {
+  const updateStatus = async () => {
     setState(true);
-    axios
+    await axios
       .put(`/api/update-order`, {
         orderId: blog._id, // Example order ID
         status: status, // Example status
@@ -50,6 +47,8 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: any }) => {
       .catch((error) => {
         setState(false);
         toast.warning(error.message);
+        oderResult();
+
         setOpen(false);
 
         console.error(error);

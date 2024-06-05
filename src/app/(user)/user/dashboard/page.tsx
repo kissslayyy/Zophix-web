@@ -10,7 +10,6 @@ import { DataTable } from "@/components/shared/DataTable";
 import axios from "axios";
 import { Order } from "@/components/admin/OrderTable";
 import { ColumnDef } from "@tanstack/react-table";
-import PopUp from "@/components/admin/PopUp";
 import { Button } from "@/components/ui/button";
 
 const Page = () => {
@@ -69,9 +68,7 @@ const Page = () => {
 
         return (
           <>
-          <Button>
-          Download
-          </Button>
+            <Button>Download</Button>
           </>
         );
       },
