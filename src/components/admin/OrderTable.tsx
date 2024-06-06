@@ -41,6 +41,9 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
         console.log(error);
       });
   };
+  useEffect(() => {
+    oderResult();
+  }, []);
   const adminColumns: ColumnDef<Order>[] = [
     {
       id: "Name",
@@ -74,9 +77,7 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
       },
     },
   ];
-  useEffect(() => {
-    oderResult();
-  }, [result]);
+
   // console.log(result);
   return (
     <Card className="xl:col-span-2">

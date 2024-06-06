@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import Order from "@/model/Order.model";
 import User from "@/model/User.model";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
   // Connect to the database
@@ -11,7 +12,7 @@ export async function GET(request: Request) {
     const orders = await Order.find({})
       .populate({ path: "customerName", model: User, select: "name email" })
       .sort({ createdAt: -1 });
-
+    revalidatePath("/admin/dashboard");
     return new Response(
       JSON.stringify({
         success: true,

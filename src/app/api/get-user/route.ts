@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dbConnect from "@/lib/dbConnect"; // Adjust the import according to your project structure
 import User from "@/model/User.model"; // Adjust the import according to your project structure
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
   dbConnect();
@@ -25,7 +26,7 @@ export async function GET(request: Request) {
     // Ensure error is an instance of Error
     const errorMessage =
       error instanceof Error ? error.message : "An unknown error occurred";
-
+    revalidatePath("/admin/dashboard");
     return new Response(
       JSON.stringify({
         success: false,
