@@ -2,7 +2,7 @@
 
 import Order from "@/model/Order.model";
 import dbConnect from "../dbConnect";
-import { CreateOrderParams } from "./shared.types";
+import { CreateOrderParams } from "../shared.types";
 import { revalidatePath } from "next/cache";
 
 export async function createOrderRequest(params: CreateOrderParams) {
