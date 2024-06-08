@@ -38,6 +38,9 @@ export default function BillCard({
           <p>
             <strong>Issue</strong>- {issue}
           </p>
+          <p>
+            <strong>Status</strong>- {status}
+          </p>
         </CardDescription>
       </CardHeader>
       <CardContent className="my-auto"></CardContent>

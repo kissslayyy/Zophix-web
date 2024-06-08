@@ -111,11 +111,20 @@ const PopUp = ({ blog, oderResult }: { blog: any; oderResult: () => void }) => {
                 <option className="py-4 text-base  " value="pending">
                   Pending
                 </option>
+                <option className="py-4 text-base  " value="accepted">
+                  Accepted
+                </option>
+                <option className="py-4 text-base  " value="rejected">
+                  Rejected
+                </option>
                 <option className="py-4 text-base  " value="working">
                   Working
                 </option>
                 <option className="py-4 text-base  " value="completed">
                   Completed
+                </option>
+                <option className="py-4 text-base  " value="delivered">
+                  Delivered
                 </option>
               </select>
             </div>

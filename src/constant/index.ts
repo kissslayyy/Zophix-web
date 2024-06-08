@@ -63,9 +63,9 @@ export const adminSidebarLinks: SidebarLink[] = [
     ],
   },
   {
-    imgURL: "/user.svg",
+    imgURL: "/indian-rupee.svg",
     route: "/admin/dashboard/generate-bill",
-    label: "Profile",
+    label: "Generate Bill",
   },
   {
     imgURL: "/settings.svg",

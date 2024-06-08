@@ -10,6 +10,8 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import BillCard from "./BillCard";
+import { Loader2 } from "lucide-react";
+import EmptySearch from "@/components/shared/EmptySearch";
 
 interface Order {
   _id: string;
@@ -30,6 +32,9 @@ const FindBill = () => {
   const [error, setError] = useState<string>("");
 
   const handleSearch = async (e: React.FormEvent) => {
+    if (phoneNumber.trim().length === 0) {
+      return null;
+    }
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -51,7 +56,6 @@ const FindBill = () => {
       setLoading(false);
     }
   };
-  console.log(orders);
 
   return (
     <div>
@@ -64,13 +68,13 @@ const FindBill = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <form className="flex" onSubmit={handleSearch}>
+            <form className="flex gap-2" onSubmit={handleSearch}>
               <Input
                 type="text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="Enter phone number"
-                className="w-max"
+                className="w-max outline-none focus:outline-none focus:ring-0"
               />
               <Button variant="update" type="submit">
                 Search
@@ -78,25 +82,31 @@ const FindBill = () => {
             </form>
           </CardContent>
         </Card>
-        {loading && <p>Loading...</p>}
+        {loading && (
+          <div className="flex justify-center h-screen items-start">
+            <Loader2 className="size-16 animate-spin" />
+          </div>
+        )}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        {orders.length > 0 && (
-          <ul>
+        {orders.length > 0 ? (
+          <div className="m-4">
             {orders.map((order) => (
-              <li key={order._id}>
-                <BillCard
-                  key={order._id}
-                  _id={order._id}
-                  name={order.customerName.name}
-                  email={order.customerName.email}
-                  status={order.status}
-                  phoneCompany={order.phoneCompany}
-                  phoneModel={order.phoneModel}
-                  issue={order.issue}
-                />
-              </li>
+              <BillCard
+                key={order._id}
+                _id={order._id}
+                name={order.customerName.name}
+                email={order.customerName.email}
+                status={order.status}
+                phoneCompany={order.phoneCompany}
+                phoneModel={order.phoneModel}
+                issue={order.issue}
+              />
             ))}
-          </ul>
+          </div>
+        ) : (
+          <>
+            <EmptySearch />
+          </>
         )}
       </div>
     </div>

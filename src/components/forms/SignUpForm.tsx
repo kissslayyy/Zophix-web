@@ -55,7 +55,10 @@ export default function ProfileForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="text-black space-y-4"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -116,15 +119,17 @@ export default function ProfileForm() {
             </FormItem>
           )}
         />
-        <Button disabled={isSubmitting} variant="secondary" type="submit">
-          {isSubmitting ? (
-            <>
-              <Loader2 className="animate-spin mr-2 size-4" /> please wait
-            </>
-          ) : (
-            <>sign up</>
-          )}
-        </Button>
+        <div className="mt-4">
+          <Button disabled={isSubmitting} variant="update" type="submit">
+            {isSubmitting ? (
+              <>
+                <Loader2 className="animate-spin mr-2 size-4" /> please wait
+              </>
+            ) : (
+              <>sign up</>
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );
