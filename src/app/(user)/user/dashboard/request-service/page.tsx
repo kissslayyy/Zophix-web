@@ -29,6 +29,9 @@ import axios from "axios";
 import { Textarea } from "@/components/ui/textarea";
 import { createOrderRequest } from "@/lib/actions/order.action";
 import { toast } from "sonner";
+import Bill from "@/components/shared/Bill";
+import Loading from "../loading";
+import { Loader2 } from "lucide-react";
 
 type BrandName = {
   _id: string;
@@ -57,6 +60,7 @@ const Page = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedBrandId, setSelectedBrandId] = useState("");
   const [pricingData, setPricingData] = useState<PricingData[]>([]);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const router = useRouter();
 
   const getBrandNames = () => {
@@ -101,6 +105,7 @@ const Page = () => {
     phoneModalId: string,
     serviceTypeName: string
   ) => {
+    setIsLoading(true);
     axios
       .get("/api/get-pricing/", {
         params: {
@@ -114,6 +119,9 @@ const Page = () => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -132,7 +140,9 @@ const Page = () => {
     getBrandNames();
     getService();
   }, []);
-
+  useEffect(() => {
+    getPricingData(selectedBrandId, selectedModalId, service);
+  }, [selectedBrandId, selectedModalId, service]);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -146,6 +156,14 @@ const Page = () => {
 
   const user: User = session?.user;
   const userId: string = user?._id ?? "";
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
 
   async function onSubmit(values: z.infer<typeof OrderRequestSchema>) {
     setIsSubmitting(true);
@@ -312,6 +330,10 @@ const Page = () => {
                           type="text"
                           placeholder="Enter your phone number"
                           {...field}
+                          onChange={(e) => {
+                            setPhoneNumber(e.target.value);
+                            field.onChange(e);
+                          }}
                         />
                       </FormControl>
                       <FormDescription>
@@ -341,7 +363,7 @@ const Page = () => {
                     </FormItem>
                   )}
                 />
-                <div>
+                <div className="flex gap-4">
                   <Button
                     onClick={() => onSubmit(form.getValues())}
                     className="col-span-2"
@@ -350,20 +372,44 @@ const Page = () => {
                   >
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </Button>
+                  <Button
+                    onClick={() => {
+                      getPricingData(selectedBrandId, selectedModalId, service);
+                    }}
+                  >
+                    Get Price
+                  </Button>
                 </div>
               </form>
             </Form>
           </div>
         </CardContent>
-        {pricingData && <h1>{pricingData[0]?.price}</h1>}
-        <Button
-          onClick={() => {
-            getPricingData(selectedBrandId, selectedModalId, service);
-          }}
-        >
-          Get Price
-        </Button>
       </Card>
+      <div>
+        {pricingData?.length > 0 &&
+          selectedBrand &&
+          selectedModal &&
+          service &&
+          phoneNumber && (
+            <>
+              {isLoading && (
+                <Loader2 className="animate-spin h-screen m-auto" />
+              )}
+              <Bill
+                amountDue={pricingData[0]?.price}
+                amountPaid={0}
+                customerName={user.name!}
+                orderId="001"
+                customerPhoneNumber={phoneNumber}
+                date={getCurrentDate()}
+                phoneModel={selectedModal}
+                phoneBrand={selectedBrand}
+                problemDescription={service}
+                totalAmount={pricingData[0]?.price}
+              />
+            </>
+          )}
+      </div>
     </div>
   );
 };
