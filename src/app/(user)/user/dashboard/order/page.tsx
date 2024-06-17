@@ -21,7 +21,7 @@ import { get } from "mongoose";
 const Page = () => {
   const [result, setResult] = useState();
   const router = useRouter();
-const [isLoading, setIsLoading]= useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -33,17 +33,16 @@ const [isLoading, setIsLoading]= useState(false)
   console.log(status);
   const user: User = session?.user;
   const getCustomerOrder = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     axios
       .get(`/api/get-customer-order/?customerId=${user._id}`)
       .then((response) => {
         setResult(response.data.data);
-        setIsLoading(false)
-
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   };
   useEffect(() => {
@@ -67,6 +66,11 @@ const [isLoading, setIsLoading]= useState(false)
       header: "Issue",
     },
     {
+      id: "Price",
+      accessorKey: "price",
+      header: "Price",
+    },
+    {
       id: "Status",
       accessorKey: "status",
       header: "Status",
@@ -79,21 +83,18 @@ const [isLoading, setIsLoading]= useState(false)
   console.log(result);
   return (
     <div className="">
-
       <Card className=" xl:col-span-2">
-      <CardHeader className="flex flex-row items-center">
-        <div className="grid gap-2">
-          <CardTitle>Total Order</CardTitle>
-          <CardDescription>Your total past order</CardDescription>
-        </div>
-       
-       
-      </CardHeader>
-      <CardContent>
-        {result && <DataTable data={result} columns={adminColumns} />}
-      </CardContent>
-    </Card>
-      </div>
+        <CardHeader className="flex flex-row items-center">
+          <div className="grid gap-2">
+            <CardTitle>Total Order</CardTitle>
+            <CardDescription>Your total past order</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {result && <DataTable data={result} columns={adminColumns} />}
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

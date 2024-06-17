@@ -62,6 +62,11 @@ const OrderTable = ({ title, desc }: { title: string; desc: string }) => {
       header: "Issue",
     },
     {
+      id: "Price",
+      accessorKey: "price",
+      header: "Price",
+    },
+    {
       id: "Status",
       accessorKey: "status",
       header: "Status",

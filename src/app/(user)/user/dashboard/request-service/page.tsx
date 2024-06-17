@@ -3,13 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
 import { redirect, useRouter } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -44,15 +37,28 @@ type BrandName = {
   serviceName: string;
 };
 
+type PricingData = {
+  id: string;
+  phoneCompany: string;
+  phoneModal: string;
+  serviceType: string;
+  price: number;
+};
+
 const Page = () => {
   const [brandNames, setBrandNames] = useState<BrandName[]>([]);
   const [modalNames, setModalNames] = useState<BrandName[]>([]);
   const [service, setService] = useState("");
-  const [serviceData, setServiceData] = useState<BrandName[]>();
+  const [serviceData, setServiceData] = useState<BrandName[]>([]);
   const [selectedModal, setSelectedModal] = useState("");
+  const [selectedModalId, setSelectedModalId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedBrandId, setSelectedBrandId] = useState("");
+  const [pricingData, setPricingData] = useState<PricingData[]>([]);
   const router = useRouter();
+
   const getBrandNames = () => {
     axios
       .get("/api/phone-company")
@@ -63,20 +69,19 @@ const Page = () => {
         console.log(error);
       });
   };
+
   const getPhoneModal = (id: string) => {
-    console.log(id, "yesy");
     axios
       .get(`/api/phone-modal/?brand=${id}`)
       .then((response) => {
         setSelectedBrand(response.data.data[0].phonecompanies);
         setModalNames(response.data.data);
-        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  console.log(selectedBrand, "selected brand");
+
   const getService = () => {
     setIsLoading(true);
     axios
@@ -84,12 +89,31 @@ const Page = () => {
       .then((response) => {
         setServiceData(response.data.data);
         setIsLoading(false);
-
-        console.log(response.data.data, "");
       })
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
+      });
+  };
+
+  const getPricingData = (
+    phoneCompanyId: string,
+    phoneModalId: string,
+    serviceTypeName: string
+  ) => {
+    axios
+      .get("/api/get-pricing/", {
+        params: {
+          phoneCompanyId,
+          phoneModal: phoneModalId,
+          servicietype: serviceTypeName,
+        },
+      })
+      .then((response) => {
+        setPricingData(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -103,136 +127,180 @@ const Page = () => {
       phoneNumber: "",
     },
   });
+
   useEffect(() => {
     getBrandNames();
     getService();
   }, []);
+
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       redirect("/sign-in");
     },
   });
+
   if (status === "loading") {
     return "Loading or not authenticated...";
   }
-  const str = "pending";
+
   const user: User = session?.user;
-  const userId: string = user?._id ?? ""; // Using optional chaining and nullish coalescing operator to ensure userId is always a string
-  console.log(userId, "use id");
+  const userId: string = user?._id ?? "";
+
   async function onSubmit(values: z.infer<typeof OrderRequestSchema>) {
-    setIsLoading(true);
+    setIsSubmitting(true);
     try {
+      console.log("Submitting form...");
       await createOrderRequest({
         customerName: userId,
         description: values.description!,
+        price: pricingData[0].price,
         issue: service,
         phoneCompany: selectedBrand,
         phoneModel: selectedModal,
-        status: str,
+        status: "pending",
         phoneNumber: values.phoneNumber,
       });
       toast.success("Order Sent successfully");
       router.push("/user/dashboard");
     } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      toast.error("error");
+      console.log("Error creating order:", error);
+      toast.error("Error creating order");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <Card className="mt-4 mx-auto max-w-3xl">
-      <CardHeader>
-        <CardTitle className="text-xl">Create an Order</CardTitle>
-        <CardDescription>Enter the details of your issue</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className=" grid gap-2 my-auto grid-cols-2"
-            >
-              <FormField
-                control={form.control}
-                name="phoneCompany"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Company</FormLabel>
-                    <select
-                      name="HeadlineAct"
-                      id="HeadlineAct"
-                      className=" inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl   leading-none text-black shadow-[0_2px_10px]  shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
-                      onChange={(e) => {
-                        getPhoneModal(e.target.value);
-                      }}
-                    >
-                      <option className="py-4 text-base  " value="">
-                        Select a Your Brand
-                      </option>
-                      {brandNames &&
-                        brandNames.map((e, i) => {
-                          return (
-                            <>
-                              <option
-                                key={e._id}
-                                className="w-full  text-xl "
-                                value={e._id}
-                              >
-                                {e.phoneCompany}
-                              </option>
-                            </>
+    <div className="grid grid-cols-2">
+      <Card className="mt-4 mx-auto max-w-3xl">
+        <CardHeader>
+          <CardTitle className="text-xl">Create an Order</CardTitle>
+          <CardDescription>Enter the details of your issue</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="grid gap-2 my-auto grid-cols-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="phoneCompany"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Company</FormLabel>
+                      <select
+                        name="phoneCompany"
+                        id="phoneCompany"
+                        className="inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl leading-none text-black shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+                        onChange={(e) => {
+                          const selectedBrand = brandNames.find(
+                            (b) => b._id === e.target.value
                           );
-                        })}
-                    </select>
-                    <FormDescription>
-                      Choose the brand of your phone.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phoneModel"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Modal</FormLabel>
-                    <select
-                      name="HeadlineAct"
-                      id="HeadlineAct"
-                      className=" inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl   leading-none text-black shadow-[0_2px_10px]  shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
-                      onChange={(e) => {
-                        setSelectedModal(e.target.value);
-                      }}
-                    >
-                      <option className="py-4 text-base  " value="">
-                        Select a Your Brand
-                      </option>
-                      {modalNames &&
-                        modalNames.map((e, i) => {
-                          return (
-                            <>
-                              <option
-                                key={e._id}
-                                className="w-full  text-xl "
-                                value={e.phoneModal}
-                              >
-                                {e.phoneModal}
-                              </option>
-                            </>
+                          if (selectedBrand) {
+                            setSelectedBrand(selectedBrand.phoneCompany);
+                            setSelectedBrandId(selectedBrand._id);
+                            getPhoneModal(selectedBrand._id);
+                          }
+                        }}
+                      >
+                        <option className="py-4 text-base" value="">
+                          Select a Your Brand
+                        </option>
+                        {brandNames &&
+                          brandNames.map((e) => (
+                            <option
+                              key={e._id}
+                              className="w-full text-xl"
+                              value={e._id}
+                            >
+                              {e.phoneCompany}
+                            </option>
+                          ))}
+                      </select>
+                      <FormDescription>
+                        Choose the brand of your phone.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phoneModel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Model</FormLabel>
+                      <select
+                        name="phoneModel"
+                        id="phoneModel"
+                        className="inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl leading-none text-black shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+                        onChange={(e) => {
+                          const selectedModal = modalNames.find(
+                            (m) => m.phoneModal === e.target.value
                           );
-                        })}
-                    </select>
-                    <FormDescription>
-                      You can manage email addresses in your{" "}
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="col-span-2">
+                          if (selectedModal) {
+                            setSelectedModal(selectedModal.phoneModal);
+                            setSelectedModalId(selectedModal._id);
+                          }
+                        }}
+                      >
+                        <option className="py-4 text-base" value="">
+                          Select a Your Model
+                        </option>
+                        {modalNames &&
+                          modalNames.map((e) => (
+                            <option
+                              key={e._id}
+                              className="w-full text-xl"
+                              value={e.phoneModal}
+                            >
+                              {e.phoneModal}
+                            </option>
+                          ))}
+                      </select>
+                      <FormDescription>
+                        Choose the model of your phone.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="issue"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Issue</FormLabel>
+                      <select
+                        name="issue"
+                        id="issue"
+                        className="inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl leading-none text-black shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+                        onChange={(e) => setService(e.target.value)}
+                      >
+                        <option className="py-4 text-base" value="">
+                          Select an Issue
+                        </option>
+                        {serviceData &&
+                          serviceData.map((e) => (
+                            <option
+                              key={e._id}
+                              className="w-full text-xl"
+                              value={e.serviceName}
+                            >
+                              {e.serviceName}
+                            </option>
+                          ))}
+                      </select>
+                      <FormDescription>
+                        Choose the issue you are facing.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="phoneNumber"
@@ -241,89 +309,62 @@ const Page = () => {
                       <FormLabel>Phone Number</FormLabel>
                       <FormControl>
                         <Input
-                          {...field}
+                          type="text"
                           placeholder="Enter your phone number"
+                          {...field}
                         />
                       </FormControl>
-                      <FormDescription>Your contact number.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-full">
-                <FormField
-                  control={form.control}
-                  name="issue"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Issue</FormLabel>
-                      <FormControl>
-                        <select
-                          name="HeadlineAct"
-                          id="HeadlineAct"
-                          className=" inline-flex h-12 w-full items-center justify-center gap-[5px] rounded bg-white px-[15px] text-xl   leading-none text-black shadow-[0_2px_10px]  shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
-                          onChange={(e) => {
-                            setService(e.target.value);
-                          }}
-                        >
-                          <option className="py-4 text-base  " value="">
-                            Select a Your Brand
-                          </option>
-                          {serviceData &&
-                            serviceData.map((e, i) => {
-                              return (
-                                <>
-                                  <option
-                                    key={e._id}
-                                    className="w-full capitalize text-xl "
-                                    value={e.serviceName}
-                                  >
-                                    {e.serviceName}
-                                  </option>
-                                </>
-                              );
-                            })}
-                        </select>
-                      </FormControl>
                       <FormDescription>
-                        Brief description of the problem.
+                        Enter your contact number.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="col-span-full">
                 <FormField
                   control={form.control}
                   name="description"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-2">
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Tell us a little bit about yourself"
+                          placeholder="Describe your issue"
                           className="resize-none"
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        Any additional information.
+                        Provide additional details about your issue.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
-              <Button disabled={isLoading} variant="secondary" type="submit">
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </div>
-      </CardContent>
-    </Card>
+                <div>
+                  <Button
+                    onClick={() => onSubmit(form.getValues())}
+                    className="col-span-2"
+                    disabled={isSubmitting}
+                    variant="update"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
+        </CardContent>
+        {pricingData && <h1>{pricingData[0]?.price}</h1>}
+        <Button
+          onClick={() => {
+            getPricingData(selectedBrandId, selectedModalId, service);
+          }}
+        >
+          Get Price
+        </Button>
+      </Card>
+    </div>
   );
 };
 

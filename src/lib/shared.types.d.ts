@@ -5,6 +5,7 @@ import { User } from "next-auth";
 
 export interface CreateOrderParams {
   issue: string;
+  price: number;
   description: string | "";
   phoneCompany: string;
   phoneModel: string;

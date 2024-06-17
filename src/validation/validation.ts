@@ -26,6 +26,7 @@ export const OrderRequestSchema = z.object({
   phoneCompany: z.string(),
   phoneModel: z.string(),
   issue: z.string(),
+  price: z.number(),
   description: z.string().optional(),
   phoneNumber: z.string().min(10).max(10),
 });

@@ -8,15 +8,15 @@ export async function GET(request: Request) {
   await dbConnect();
 
   const url = new URL(request.url);
-  const phoneCompanyId = url.searchParams.get("phoneCompany");
-  const phoneModalId = url.searchParams.get("phoneModal");
-  const serviceTypeName = url.searchParams.get("serviceType");
+  const phoneCompanyId = url.searchParams.get("phoneCompanyId");
+  const phoneModal = url.searchParams.get("phoneModal");
+  const serviceTypeName = url.searchParams.get("servicietype");
 
-  if (!phoneCompanyId || !phoneModalId) {
+  if (!phoneCompanyId || !phoneModal) {
     return new Response(
       JSON.stringify({
         success: false,
-        message: "phoneCompany and phoneModal are required",
+        message: "phoneCompanyId and phoneModal are required",
       }),
       {
         status: 400,
@@ -28,18 +28,20 @@ export async function GET(request: Request) {
   try {
     const query: any = {
       phoneCompany: phoneCompanyId,
-      phoneModal: phoneModalId,
+      phoneModal: phoneModal,
     };
 
     if (serviceTypeName) {
-      const service = await Service.findOne({ serviceName: serviceTypeName }).select("_id");
+      const service = await Service.findOne({
+        serviceName: serviceTypeName,
+      }).select("_id");
       if (service) {
         query.serviceType = service._id;
       } else {
         return new Response(
           JSON.stringify({
             success: false,
-            message: "Invalid serviceType",
+            message: "Invalid servicietype",
           }),
           {
             status: 400,

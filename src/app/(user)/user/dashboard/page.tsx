@@ -16,7 +16,7 @@ const Page = () => {
   const [result, setResult] = useState<Order[] | undefined>([]);
   const oderResult = () => {
     axios
-      .get("/api/get-orders")
+      .get(`/api/get-customer-order?customerId=${user?._id}`)
       .then((response) => {
         setResult(response.data.data);
       })
@@ -53,6 +53,11 @@ const Page = () => {
       id: "Issue",
       accessorKey: "issue",
       header: "Issue",
+    },
+    {
+      id: "Price",
+      accessorKey: "price",
+      header: "Price",
     },
     {
       id: "Status",
