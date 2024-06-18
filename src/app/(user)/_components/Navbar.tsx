@@ -43,7 +43,7 @@ export const Navbar = () => {
 
   return (
     <header className="bg-dashboard-bg w-full fixed z-50">
-      <div className="max-w-6xl px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
+      <div className="max-w-6xl 2xl:max-w-7xl  px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-around">
           <div className="flex-1  text-center sm:text-left">
             <h1 className="text-base font-bold text-gray-100 sm:text-lg">

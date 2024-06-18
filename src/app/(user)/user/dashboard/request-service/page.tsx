@@ -30,8 +30,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { createOrderRequest } from "@/lib/actions/order.action";
 import { toast } from "sonner";
 import Bill from "@/components/shared/Bill";
-import Loading from "../loading";
 import { Loader2 } from "lucide-react";
+import EmptySearch from "@/components/shared/EmptySearch";
 
 type BrandName = {
   _id: string;
@@ -56,6 +56,7 @@ const Page = () => {
   const [selectedModal, setSelectedModal] = useState("");
   const [selectedModalId, setSelectedModalId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingBill, setIsLoadingBill] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedBrandId, setSelectedBrandId] = useState("");
@@ -75,14 +76,19 @@ const Page = () => {
   };
 
   const getPhoneModal = (id: string) => {
+    setIsLoading(true);
     axios
       .get(`/api/phone-modal/?brand=${id}`)
       .then((response) => {
-        setSelectedBrand(response.data.data[0].phonecompanies);
-        setModalNames(response.data.data);
+        setSelectedBrand(response.data.data[0]?.phonecompanies || "");
+        setModalNames(response.data.data || []);
       })
       .catch((error) => {
         console.log(error);
+        setModalNames([]); // Set modalNames to an empty array on error
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -105,7 +111,7 @@ const Page = () => {
     phoneModalId: string,
     serviceTypeName: string
   ) => {
-    setIsLoading(true);
+    setIsLoadingBill(true);
     axios
       .get("/api/get-pricing/", {
         params: {
@@ -121,7 +127,7 @@ const Page = () => {
         console.log(error);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsLoadingBill(false);
       });
   };
 
@@ -392,7 +398,7 @@ const Page = () => {
           service &&
           phoneNumber && (
             <>
-              {isLoading && (
+              {isLoadingBill && (
                 <Loader2 className="animate-spin h-screen m-auto" />
               )}
               <Bill
@@ -409,6 +415,26 @@ const Page = () => {
               />
             </>
           )}
+
+        {(pricingData?.length === 0 ||
+          !selectedBrand ||
+          !selectedModal ||
+          !service ||
+          !phoneNumber) && (
+          <div className="m-auto text-center text-xl ">
+            {pricingData?.length === 0 && <EmptySearch />}
+            {!selectedBrand && <EmptySearch />}
+            {selectedBrand && !selectedModal && (
+              <EmptySearch subText="Please select your phone brand." />
+            )}
+            {selectedBrand && selectedModal && !service && (
+              <EmptySearch subText="Please select the issue you are facing." />
+            )}
+            {selectedBrand && selectedModal && service && !phoneNumber && (
+              <EmptySearch subText="Please enter your phone number." />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

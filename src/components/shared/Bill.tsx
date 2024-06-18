@@ -1,5 +1,6 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { generatePDF } from "@/lib/utils";
 
 interface BillProps {
   date: string;
@@ -12,6 +13,7 @@ interface BillProps {
   totalAmount: number;
   amountPaid: number;
   amountDue: number;
+  autoDownload?: boolean;
 }
 
 const Bill: React.FC<BillProps> = ({
@@ -25,16 +27,28 @@ const Bill: React.FC<BillProps> = ({
   totalAmount,
   amountPaid,
   amountDue,
+  autoDownload = false,
 }) => {
+  const billRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (autoDownload && billRef.current) {
+      generatePDF(billRef.current);
+    }
+  }, [autoDownload]);
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded p-8 max-w-3xl w-full">
+      <div
+        ref={billRef}
+        className="bg-[#F3F6FF] shadow-md rounded p-8 max-w-3xl w-full"
+      >
         <div className="flex justify-between items-center mb-8">
           <Image
             alt="facebook icon"
             width={200}
             height={200}
-            className=""
+            className="bg-gray-900 rounded-full object-contain size-32"
             src="https://ucarecdn.com/5f0c61d8-e60b-4fb6-b33d-430f625c02a7/zophix__com2__pdfio_removebgpreview.png"
           />
           <div className="text-right">

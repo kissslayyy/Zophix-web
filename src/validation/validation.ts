@@ -3,23 +3,33 @@ import { z } from "zod";
 export const SignUpSchema = z.object({
   name: z.string(),
   email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(6, { message: "Password must be 6 character" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" }),
 });
 
 export const VerifySchema = z.object({
-  verifyCode: z.string().min(5, "Verification code must be 6 digit"),
+  verifyCode: z
+    .string()
+    .min(6, { message: "Verification code must be 6 digits" }),
 });
+
 export const ResetPasswordSchema = z.object({
-  verifyCode: z.string().min(5, "Verification code must be 5 digit"),
-  newPassword: z.string().min(6, "password  must be 6 letters"),
+  verifyCode: z
+    .string()
+    .min(5, { message: "Verification code must be 5 digits" }),
+  newPassword: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" }),
 });
+
 export const SignInSchema = z.object({
   identifier: z.string(),
   password: z.string(),
 });
 
 export const requestPasswordReset = z.object({
-  email: z.string().email(),
+  email: z.string().email({ message: "Invalid email address" }),
 });
 
 export const OrderRequestSchema = z.object({
@@ -28,7 +38,10 @@ export const OrderRequestSchema = z.object({
   issue: z.string(),
   price: z.number(),
   description: z.string().optional(),
-  phoneNumber: z.string().min(10).max(10),
+  phoneNumber: z
+    .string()
+    .min(10, { message: "Phone number must be at least 10 digits" })
+    .max(10, { message: "Phone number must be at most 10 digits" }),
 });
 
 export const AddPriceSchema = z.object({
