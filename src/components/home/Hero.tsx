@@ -25,7 +25,7 @@ export const Hero = () => {
   ];
   return (
     <Reveal>
-      <main className=" relative overflow-hidden lg:h-screen">
+      <main className=" relative overflow-hidden lg:h-screen xl:h-full">
         <div className=" flex relative z-20 items-center overflow-hidden">
           <div className="container mx-auto px-6 flex relative py-16">
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
