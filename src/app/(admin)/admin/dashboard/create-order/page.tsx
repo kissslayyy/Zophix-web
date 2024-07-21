@@ -131,6 +131,7 @@ const Page = () => {
         phoneModel: selectedModal,
         status: "str",
         phoneNumber: values.phoneNumber,
+        price: 0,
       });
       toast.success("Order Sent successfully");
       router.push("/user/dashboard");
