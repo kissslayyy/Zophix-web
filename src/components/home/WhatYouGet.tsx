@@ -59,12 +59,13 @@ const WhatYouGet: React.FC = () => {
 
   return (
     <Reveal>
-      <div className="relative mx-auto py-24 w-full my-10 bg-black text-white">
+      <div className="relative mx-auto py-24 w-full  bg-black text-white">
         {/* Background Image */}
         <Image
           src="https://ucarecdn.com/5aaf36f1-b2e1-4dc3-a59d-90cc9bf17ce3/sideviewsmartphonebeingdisinfectedwithcopyspace.jpg"
           alt="Background"
-          layout="fill"
+          width={500}
+          height={500}
           className="absolute top-0 left-0 w-full h-full object-cover object-left opacity-50"
         />
 

@@ -4,7 +4,7 @@ import { ModeToggle } from "./ModeToggle";
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50  bg-black/30  backdrop-blur-lg ">
+    <nav className="sticky top-0 z-50  bg-black/90  backdrop-blur-lg ">
       <div className="mx-4 my-auto  flex px-4">
         <div className="grid h-24 grid-cols-12 items-center justify-around">
           <div className="col-span-6  lg:col-span-2 ">
@@ -18,7 +18,7 @@ export default function Navbar() {
               />{" "}
             </div>
           </div>
-          <div className="lg:col-span-8 mx-auto hidden space-x-4 text-lg font-light0 dark:text-white md:block">
+          <div className="lg:col-span-8 mx-auto hidden space-x-4 text-lg font-light0 text-white md:block">
             <a href="#">About</a>
             <a href="#">Service</a>
             <a href="#">Contact</a>
