@@ -20,10 +20,11 @@ import { SignInSchema } from "@/validation/validation";
 import { toast } from "sonner";
 import result from "postcss/lib/result";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function SignInForm() {
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
@@ -33,6 +34,7 @@ export default function SignInForm() {
   });
 
   const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
+    setIsLoading(true);
     const result = await signIn("credentials", {
       redirect: false,
       identifier: data.identifier,
@@ -51,6 +53,7 @@ export default function SignInForm() {
       router.replace("/user/dashboard");
       toast.success("Login success");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -107,8 +110,13 @@ export default function SignInForm() {
                 )}
               />
               <div>
-                <Button className=" " variant="update" type="submit">
-                  Log-In
+                <Button
+                  className=" "
+                  disabled={isLoading}
+                  variant="update"
+                  type="submit"
+                >
+                  {isLoading ? "Loading..." : "Log-In"}
                 </Button>
               </div>
             </form>

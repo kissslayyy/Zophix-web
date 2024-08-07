@@ -1,9 +1,19 @@
+"use client";
 import Image from "next/image";
 import React from "react";
-import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
-
+import { useSession } from "next-auth/react";
+import { User } from "next-auth";
+import { Button } from "../ui/button";
 export default function Navbar() {
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+    },
+  });
+  const user: User = session?.user;
+
   return (
     <nav className="sticky top-0 z-50  bg-black/90  backdrop-blur-lg ">
       <div className="mx-4 my-auto  flex px-4">
@@ -26,8 +36,16 @@ export default function Navbar() {
           </div>
           <div className=" col-span-2 relative    hidden md:block">
             <div className="flex gap-2">
-              <Link href={"/sign-up"}>Sign Up</Link>
-              <Link href={"/sign-up"}>Login in</Link>
+              {user ? (
+                <Button asChild>
+                  <Link href={"/user/dashboard"}>Dashboard</Link>
+                </Button>
+              ) : (
+                <>
+                  <Link href={"/sign-up"}>Sign Up</Link>
+                  <Link href={"/sign-in"}>Log-in </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
