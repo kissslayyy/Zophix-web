@@ -10,7 +10,7 @@ const LeftSideBar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sticky top-0  shrink text-white flex   left-0 bg-dashboard-bg h-screen w-[200px] flex-col p-2.5 gap-y-4">
+    <section className="sticky top-0 max-sm:hidden  shrink text-white flex   left-0 bg-dashboard-bg h-screen w-[200px] flex-col p-2.5 gap-y-4">
       <div className=" mt-5">
         <Image
           alt="facebook icon"

@@ -11,6 +11,7 @@ import axios from "axios";
 import { Order } from "@/components/admin/OrderTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Page = () => {
   const [result, setResult] = useState<Order[] | undefined>([]);
@@ -73,7 +74,11 @@ const Page = () => {
 
         return (
           <>
-            <Button>Download</Button>
+            <Button asChild variant={"update"} size="sm">
+              <Link href={`/user/dashboard/download-bill/${blog._id}`}>
+                Download bill
+              </Link>
+            </Button>
           </>
         );
       },
@@ -93,7 +98,7 @@ const Page = () => {
       </div>
       <div className=" my-4  p-4 ">
         <h3 className="text-2xl font-semibold pb-1">Past Services</h3>
-        <div className="w-[960px] ">
+        <div className=" lg:w-[960px] ">
           {result && <DataTable columns={adminColumns} data={result} />}
         </div>
       </div>

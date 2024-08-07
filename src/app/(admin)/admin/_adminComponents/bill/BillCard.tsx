@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 interface OrderProps {
   _id: string;
 
@@ -45,7 +46,11 @@ export default function BillCard({
       </CardHeader>
       <CardContent className="my-auto"></CardContent>
       <div className="m-auto">
-        <Button>Create New Order</Button>
+        <Button asChild variant={"update"} size="sm">
+          <Link href={`/admin/dashboard/download-bill/${_id}`}>
+            Download Bill
+          </Link>
+        </Button>
       </div>
     </Card>
   );

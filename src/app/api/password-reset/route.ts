@@ -8,14 +8,14 @@ export async function POST(request: Request) {
 
   try {
     // Parse the request body
-    const { email, newPassword, verifyCode } = await request.json();
+    const { email, newPassword } = await request.json();
 
     // Validate input
-    if (!email || !newPassword || !verifyCode) {
+    if (!email || !newPassword) {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Email, new password, and verification code are required",
+          message: "Email, new password, and v",
         }),
         {
           status: 400,
@@ -41,18 +41,6 @@ export async function POST(request: Request) {
     }
 
     // Verify the verification code
-    if (user.verifyCode !== verifyCode) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Verification code is incorrect",
-        }),
-        {
-          status: 401,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-    }
 
     // Hash the new password
     const salt = await bcrypt.genSalt(10);

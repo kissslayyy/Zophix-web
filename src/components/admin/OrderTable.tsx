@@ -22,6 +22,8 @@ import PopUp from "./PopUp";
 // You can use a Zod schema here if you want.
 export type Order = {
   id: string;
+  _id: string;
+
   status: "pending" | "processing" | "success" | "failed";
   Phone: string;
   issue: string;

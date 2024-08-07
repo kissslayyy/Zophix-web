@@ -38,7 +38,10 @@ const Bill: React.FC<BillProps> = ({
   }, [autoDownload]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div
+      id="bill"
+      className="p-4 w-full max-w-3xl mx-auto min-h-screen bg-white border rounded-lg shadow"
+    >
       <div
         ref={billRef}
         className="bg-[#F3F6FF] shadow-md rounded p-8 max-w-3xl w-full"

@@ -72,7 +72,9 @@ const NewService = () => {
                 className="flex cursor-pointer flex-col items-center bg-white p-6 rounded-lg shadow-md"
               >
                 <div className="text-4xl text-blue-500 mb-4">{repair.icon}</div>
-                <h3 className="text-lg font-medium">{repair.label}</h3>
+                <h3 className="text-lg text-black font-medium">
+                  {repair.label}
+                </h3>
               </MotionDiv>
             ))}
           </div>

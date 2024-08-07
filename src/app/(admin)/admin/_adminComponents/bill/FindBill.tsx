@@ -56,7 +56,7 @@ const FindBill = () => {
       setLoading(false);
     }
   };
-
+  console.log(orders);
   return (
     <div>
       <div className="">

@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     // Ensure error is an instance of Error
     const errorMessage =
       error instanceof Error ? error.message : "An unknown error occurred";
-    revalidatePath("/admin/dashboard");
+    revalidatePath("/");
     return new Response(
       JSON.stringify({
         success: false,

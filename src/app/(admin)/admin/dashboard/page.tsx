@@ -28,9 +28,7 @@ const Page = () => {
       <div className="rounded-2xl flex flex-col   text-black">
         <div className="flex my-auto gap-4">
           <UserCard user={user} />
-          <div className="my-auto">
-            <AddOrders />
-          </div>
+          <div className="my-auto"></div>
         </div>
 
         <div className=" my-4  p-4 ">

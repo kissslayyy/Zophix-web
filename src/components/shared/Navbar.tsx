@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { ModeToggle } from "./ModeToggle";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -23,8 +24,11 @@ export default function Navbar() {
             <a href="#">Service</a>
             <a href="#">Contact</a>
           </div>
-          <div className=" col-span-2 relative   hidden md:block">
-            <ModeToggle />
+          <div className=" col-span-2 relative    hidden md:block">
+            <div className="flex gap-2">
+              <Link href={"/sign-up"}>Sign Up</Link>
+              <Link href={"/sign-up"}>Login in</Link>
+            </div>
           </div>
         </div>
       </div>

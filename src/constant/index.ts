@@ -19,7 +19,7 @@ export const sidebarLinks: SidebarLink[] = [
 
   {
     imgURL: "/settings.svg",
-    route: "/user/dashboard/setting",
+    route: "/user/dashboard/reset-password",
     label: "Setting",
   },
 ];
@@ -65,11 +65,6 @@ export const adminSidebarLinks: SidebarLink[] = [
   {
     imgURL: "/indian-rupee.svg",
     route: "/admin/dashboard/generate-bill",
-    label: "Generate Bill",
-  },
-  {
-    imgURL: "/settings.svg",
-    route: "/admin/dashboard/setting",
-    label: "Setting",
+    label: "Find Bill",
   },
 ];

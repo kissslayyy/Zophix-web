@@ -196,7 +196,7 @@ const Page = () => {
   }
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid lg:grid-cols-2">
       <Card className="mt-4 mx-auto max-w-3xl">
         <CardHeader>
           <CardTitle className="text-xl">Create an Order</CardTitle>
@@ -207,7 +207,7 @@ const Page = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="grid gap-2 my-auto grid-cols-2"
+                className="grid gap-2 my-auto md:grid-cols-2"
               >
                 <FormField
                   control={form.control}
@@ -353,7 +353,7 @@ const Page = () => {
                   control={form.control}
                   name="description"
                   render={({ field }) => (
-                    <FormItem className="col-span-2">
+                    <FormItem className="lg:col-span-2">
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Textarea
@@ -379,6 +379,7 @@ const Page = () => {
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </Button>
                   <Button
+                    className="lg:hidden"
                     onClick={() => {
                       getPricingData(selectedBrandId, selectedModalId, service);
                     }}
