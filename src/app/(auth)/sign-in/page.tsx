@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import result from "postcss/lib/result";
 import Image from "next/image";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -116,7 +117,13 @@ export default function SignInForm() {
                   variant="update"
                   type="submit"
                 >
-                  {isLoading ? "Loading..." : "Log-In"}
+                  {isLoading ? (
+                    <>
+                      <Loader2 className=" size-4 animate-spin" /> Loading...
+                    </>
+                  ) : (
+                    "Log-In"
+                  )}
                 </Button>
               </div>
             </form>

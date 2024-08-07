@@ -95,8 +95,13 @@ export default function SignInForm() {
               />
 
               <div>
-                <Button className=" " variant="update" type="submit">
-                  Submit
+                <Button
+                  className=" "
+                  disabled={isSubmitting}
+                  variant="update"
+                  type="submit"
+                >
+                  {isSubmitting ? "Submitting..." : " Submit"}
                 </Button>
               </div>
             </form>
