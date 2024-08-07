@@ -92,7 +92,7 @@ export const Navbar = () => {
               Log-Out
             </button>
           </div>
-          <div className="md:hidden ">
+          <div className="md:hidden text-white">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="link">

@@ -5,6 +5,16 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+
 export default function Navbar() {
   const { data: session, status } = useSession({
     required: true,
@@ -26,7 +36,7 @@ export default function Navbar() {
                 height={500}
                 className=" lg:object-contain"
                 src="https://ucarecdn.com/5e1282d6-c786-4c80-8ced-217daa5fb84d/zophix__com2__pdfio_removebgpreview1.png"
-              />{" "}
+              />
             </div>
           </div>
           <div className="lg:col-span-8 mx-auto hidden space-x-4 text-lg font-light0 text-white md:block">
@@ -34,8 +44,42 @@ export default function Navbar() {
             <a href="#">Service</a>
             <a href="#">Contact</a>
           </div>
-          <div className=" col-span-2 relative    hidden md:block">
-            <div className="flex gap-2">
+          <div className=" lg:col-span-2 col-span-6 relative text-white    ">
+            <div className="flex justify-end lg:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="link">
+                    <HamburgerMenuIcon className="text-gray-100 my-auto " />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <a href="#">About</a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <a href="#">Service</a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <a href="#">Contact</a>
+                  </DropdownMenuItem>
+                  {user ? (
+                    <DropdownMenuItem>
+                      <Link href={"/user/dashboard"}>Dashboard</Link>
+                    </DropdownMenuItem>
+                  ) : (
+                    <>
+                      <DropdownMenuItem>
+                        <Link href={"/sign-up"}>Sign Up</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link href={"/sign-in"}>Log-in</Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <div className="md:flex gap-2 hidden ">
               {user ? (
                 <Button asChild>
                   <Link href={"/user/dashboard"}>Dashboard</Link>
@@ -43,14 +87,13 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link href={"/sign-up"}>Sign Up</Link>
-                  <Link href={"/sign-in"}>Log-in </Link>
+                  <Link href={"/sign-in"}>Log-in</Link>
                 </>
               )}
             </div>
           </div>
         </div>
       </div>
-
       {/* <!-- End Navbar with Topbar--> */}
     </nav>
   );
