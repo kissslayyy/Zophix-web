@@ -70,7 +70,7 @@ const WhatYouGet: React.FC = () => {
         />
 
         {/* Main Container */}
-        <div className="relative w-full flex flex-row items-center">
+        <div className="relative w-full flex flex-col lg:flex-row items-center">
           {/* Title Container */}
           <motion.div
             className="flex-shrink-0 mx-auto mb-10 px-4 text-center lg:text-left"

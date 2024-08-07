@@ -31,16 +31,19 @@ const NewService = () => {
   const words = [
     {
       text: "Services",
-      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
+      className:
+        "text-black dark:text-black lg:text:3xl xl:text-5xl font-bold text-2xl ",
     },
 
     {
       text: "offer",
-      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
+      className:
+        " lg:text:3xl text-black dark:text-black xl:text-5xl font-bold text-2xl ",
     },
     {
       text: "at",
-      className: " lg:text:3xl xl:text-5xl font-bold text-2xl ",
+      className:
+        " lg:text:3xl xl:text-5xl text-black dark:text-black font-bold text-2xl ",
     },
     {
       text: "Zophix.",
@@ -67,6 +70,7 @@ const NewService = () => {
                   duration: 0.5,
                   ease: "easeIn",
                   delay: index * 0.3,
+                  viewport: { once: true },
                 }}
                 key={index}
                 className="flex cursor-pointer flex-col items-center bg-white p-6 rounded-lg shadow-md"

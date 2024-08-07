@@ -21,7 +21,7 @@ const About: React.FC = () => {
       <section className="bg-white/80 ">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
           <MotionDiv
-            className="font-light text-gray-500 sm:text-lg "
+            className="font-light text-gray-900 sm:text-lg "
             initial="hidden"
             animate="visible"
             transition={{ duration: 1, ease: "easeIn" }}
@@ -49,7 +49,7 @@ const About: React.FC = () => {
             </p>
             <Button className="mt-4">Read more</Button>
           </MotionDiv>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 max-sm:mt-4 gap-4">
             {images.map((image, index) => (
               <MotionDiv
                 key={index}

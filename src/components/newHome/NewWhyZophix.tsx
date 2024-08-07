@@ -44,8 +44,8 @@ const NewWhyZophix: React.FC = () => {
   return (
     <Reveal>
       <div className="w-full bg-gray-100 text-gray-700">
-        <div className="mx-auto py-10 px-4 gap-2 w-full max-w-7xl grid grid-cols-2">
-          <div className="order-2 lg:order-1 col-span-1 lg:row-span-2 relative w-full hidden sm:block">
+        <div className="mx-auto py-10 px-4 gap-2 w-full lg:max-w-7xl grid grid-cols-1 lg:grid-cols-2">
+          <div className="order-2  lg:order-1  lg:row-span-2 relative w-full hidden md:block">
             <Image
               width={500}
               height={500}
@@ -55,7 +55,7 @@ const NewWhyZophix: React.FC = () => {
             />
           </div>
           <MotionDiv
-            className="order-1 lg:order-2 col-span-full sm:col-span-1 row-span-1 mb-8 w-full space-y-4 text-center sm:text-left"
+            className=" lg:order-2  md:col-span-1 col-span-full  row-span-1 mb-8 w-full space-y-4 text-start "
             initial={{ opacity: 0, x: 0 }}
             whileInView={{ opacity: 1, x: [0, 50] }}
             transition={{ duration: 1, ease: "easeIn" }}
@@ -78,14 +78,14 @@ const NewWhyZophix: React.FC = () => {
               repair services.
             </p>
           </MotionDiv>
-          <dl className="order-3 col-span-full lg:col-span-1 row-span-1 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-1 gap-6">
+          <div className="order-3 col-span-full lg:col-span-1 row-span-1 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-1 gap-6">
             {/* :FEATURES */}
             {features.map((feature, index) => (
               <Reveal key={index}>
                 <div className="flex flex-col lg:flex-row">
                   <span className="flex-shrink-0 mx-auto lg:mx-0 p-2 w-full sm:w-auto max-w-xs inline-flex justify-center items-center rounded-xl ">
                     {feature.icon}
-                    <dt className="ml-2 sm:hidden text-white font-semibold">
+                    <dt className="ml-2 sm:hidden text-black font-semibold">
                       {feature.title}
                     </dt>
                   </span>
@@ -98,7 +98,7 @@ const NewWhyZophix: React.FC = () => {
                 </div>
               </Reveal>
             ))}
-          </dl>
+          </div>
         </div>
       </div>
     </Reveal>
