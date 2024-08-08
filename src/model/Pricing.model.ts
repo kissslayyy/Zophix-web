@@ -8,12 +8,20 @@ export interface IPricing extends Document {
 }
 
 const PricingSchema = new Schema({
-  phoneCompany: { type: Schema.Types.ObjectId, ref: "PhoneCompany" },
-  phoneModal: { type: Schema.Types.ObjectId, ref: "PhoneModal" },
-  serviceType: { type: Schema.Types.ObjectId, ref: "Service" },
-  price: { type: String, require: true },
+  phoneCompany: {
+    type: Schema.Types.ObjectId,
+    ref: "PhoneCompany",
+    required: true,
+  },
+  phoneModal: {
+    type: Schema.Types.ObjectId,
+    ref: "PhoneModal",
+    required: true,
+  },
+  serviceType: { type: Schema.Types.ObjectId, ref: "Service", required: true },
+  price: { type: String, required: true },
 });
 
-const Price = models.Price || model("Price", PricingSchema);
+const Price = models.Price || model<IPricing>("Price", PricingSchema);
 
 export default Price;

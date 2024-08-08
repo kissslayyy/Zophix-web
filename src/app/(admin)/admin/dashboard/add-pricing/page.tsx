@@ -64,13 +64,12 @@ const Page = () => {
       });
   };
   const getPhoneModal = (id: string) => {
-    
     axios
       .get(`/api/phone-modal/?brand=${id}`)
       .then((response) => {
         const data = response.data.data;
         if (Array.isArray(data) && data.length > 0) {
-          setSelectedBrand(data[0]._id);
+          setSelectedBrand(id);
           if (data[0].phonecompanies === undefined) {
             setModalNames([]);
           } else {
@@ -87,6 +86,8 @@ const Page = () => {
       });
   };
   console.log(selectedBrand, "selected brand");
+  console.log(selectedModal, "selected modal");
+
   const getService = () => {
     setIsLoading(true);
     axios

@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/input-otp";
 import Image from "next/image";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Page({ params }: { params: { email: string } }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -147,7 +148,14 @@ export default function Page({ params }: { params: { email: string } }) {
                   variant={"update"}
                   type="submit"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className=" size-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
                 </Button>
               </form>
             </Form>

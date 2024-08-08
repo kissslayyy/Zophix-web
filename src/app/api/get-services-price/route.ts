@@ -10,7 +10,6 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const phoneCompanyId = url.searchParams.get("phoneCompanyId");
   const phoneModal = url.searchParams.get("phoneModal");
-  const serviceTypeName = url.searchParams.get("serviceType");
 
   if (!phoneCompanyId || !phoneModal) {
     return new Response(
@@ -30,26 +29,6 @@ export async function GET(request: Request) {
       phoneCompany: phoneCompanyId,
       phoneModal: phoneModal,
     };
-
-    if (serviceTypeName) {
-      const service = await Service.findOne({
-        serviceName: serviceTypeName,
-      }).select("_id");
-      if (service) {
-        query.serviceType = service._id;
-      } else {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            message: "Invalid servicietype",
-          }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-      }
-    }
 
     const prices = await Price.find(query)
       .populate({

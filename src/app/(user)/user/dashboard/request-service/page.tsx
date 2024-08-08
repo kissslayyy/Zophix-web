@@ -117,7 +117,7 @@ const Page = () => {
         params: {
           phoneCompanyId,
           phoneModal: phoneModalId,
-          servicietype: serviceTypeName,
+          serviceType: serviceTypeName,
         },
       })
       .then((response) => {

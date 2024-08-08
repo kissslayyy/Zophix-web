@@ -23,6 +23,7 @@ import Image from "next/image";
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import { APiResponse } from "@/types/apiResponse";
+import { Loader2 } from "lucide-react";
 
 export default function SignInForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -101,7 +102,14 @@ export default function SignInForm() {
                   variant="update"
                   type="submit"
                 >
-                  {isSubmitting ? "Submitting..." : " Submit"}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className=" size-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    " Submit"
+                  )}
                 </Button>
               </div>
             </form>

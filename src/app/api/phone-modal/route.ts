@@ -20,7 +20,7 @@ export async function POST(request: Request) {
         message: "Please enter phone company",
       });
     }
-    
+
     // Check if the phoneModal already exists
     const existingPhoneModal = await PhoneModal.findOne({ brand, phoneModal });
     if (existingPhoneModal) {
@@ -99,7 +99,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
 
 export async function DELETE(request: Request) {
   await dbConnect();
