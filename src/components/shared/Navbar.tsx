@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
 import { Button } from "../ui/button";
@@ -14,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Loader2Icon, LoaderPinwheel } from "lucide-react";
 
 export default function Navbar() {
   const { data: session, status } = useSession({
@@ -23,13 +25,13 @@ export default function Navbar() {
     },
   });
   const user: User = session?.user;
-
+  const router = useRouter();
   return (
     <nav className="sticky top-0 z-50  bg-black/90  backdrop-blur-lg ">
       <div className="mx-4 my-auto  flex px-4">
         <div className="grid h-24 grid-cols-12 items-center justify-around">
           <div className="col-span-6  lg:col-span-2 ">
-            <div className="">
+            <div className="cursor-pointer" onClick={() => router.push("/")}>
               <Image
                 alt="facebook icon"
                 width={500}
@@ -41,7 +43,7 @@ export default function Navbar() {
           </div>
           <div className="lg:col-span-8 mx-auto hidden space-x-4 text-lg font-light0 text-white md:block">
             <a href="#">About</a>
-            <a href="#">Service</a>
+            <Link href="/services">Service</Link>
             <a href="#">Contact</a>
           </div>
           <div className=" lg:col-span-2 col-span-6 relative text-white    ">
@@ -80,14 +82,24 @@ export default function Navbar() {
               </DropdownMenu>
             </div>
             <div className="md:flex gap-2 hidden ">
-              {user ? (
-                <Button asChild>
-                  <Link href={"/user/dashboard"}>Dashboard</Link>
-                </Button>
+              {status === "loading" ? (
+                <>
+                  <Loader2Icon className="animate-spin " />
+                </>
               ) : (
                 <>
-                  <Link href={"/sign-up"}>Sign Up</Link>
-                  <Link href={"/sign-in"}>Log-in</Link>
+                  {user ? (
+                    <>
+                      <Button asChild>
+                        <Link href={"/user/dashboard"}>Dashboard</Link>
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href={"/sign-up"}>Sign Up</Link>
+                      <Link href={"/sign-in"}>Log-in</Link>
+                    </>
+                  )}
                 </>
               )}
             </div>

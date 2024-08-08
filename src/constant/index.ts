@@ -67,4 +67,9 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/dashboard/generate-bill",
     label: "Find Bill",
   },
+  {
+    imgURL: "/indian-rupee.svg",
+    route: "/admin/dashboard/find-price",
+    label: "Find price",
+  },
 ];

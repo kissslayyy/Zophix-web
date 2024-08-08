@@ -1,7 +1,7 @@
 import FindPrice from "@/components/shared/FindPrice";
 import React from "react";
 
-const Page = () => {
+const page = () => {
   return (
     <div>
       <FindPrice />
@@ -9,4 +9,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;
