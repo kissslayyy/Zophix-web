@@ -42,7 +42,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="lg:col-span-8 mx-auto hidden space-x-4 text-lg font-light0 text-white md:block">
-            <a href="#">About</a>
+            <Link href="/about">About</Link>
             <Link href="/services">Service</Link>
             <a href="#">Contact</a>
           </div>
@@ -56,10 +56,10 @@ export default function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>
-                    <a href="#">About</a>
+                    <Link href="/about">About</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <a href="#">Service</a>
+                    <Link href="/services">Service</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <a href="#">Contact</a>
