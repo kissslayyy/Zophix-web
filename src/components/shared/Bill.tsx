@@ -4,6 +4,7 @@ import { generatePDF } from "@/lib/utils";
 
 interface BillProps {
   date: string;
+  status: string;
   orderId: string;
   customerName: string;
   customerPhoneNumber: string;
@@ -27,6 +28,7 @@ const Bill: React.FC<BillProps> = ({
   totalAmount,
   amountPaid,
   amountDue,
+  status,
   autoDownload = false,
 }) => {
   const billRef = useRef<HTMLDivElement>(null);
@@ -36,7 +38,7 @@ const Bill: React.FC<BillProps> = ({
       generatePDF(billRef.current);
     }
   }, [autoDownload]);
-
+  console.log(status);
   return (
     <div
       id="bill"
@@ -96,11 +98,11 @@ const Bill: React.FC<BillProps> = ({
           </div>
           <div>
             <p className="font-bold">PAID</p>
-            <p>{amountPaid}</p>
+            <p>{status === "pending" ? "0" : amountPaid}</p>
           </div>
           <div>
             <p className="font-bold">AMOUNT DUE</p>
-            <p>{amountDue}</p>
+            <p>{status === "pending" ? amountPaid : "0"}</p>
           </div>
         </div>
         <p className="text-green-500 font-bold">100 days warranty</p>

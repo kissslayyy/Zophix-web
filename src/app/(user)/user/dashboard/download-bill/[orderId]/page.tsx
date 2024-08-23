@@ -73,12 +73,13 @@ const Page = ({ params }: { params: { orderId: string } }) => {
       });
     }
   };
-
+  console.log(orderData);
   return (
     <div>
       {orderData ? (
         <div className="flex flex-col justify-center items-center gap-4">
           <Bill
+            status={orderData.status}
             amountDue={0}
             amountPaid={orderData.price} // Assuming no amount is paid yet
             customerName={orderData.customerName.name}
