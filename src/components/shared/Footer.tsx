@@ -6,6 +6,7 @@ import {
   YoutubeIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export const Footer = () => {
@@ -170,6 +171,12 @@ export const Footer = () => {
                     href="/privacy-policy"
                   >
                     Privcay policy
+                    <Link
+                      className="p-[1px]"
+                      href="https://nearstudy.com/bihar-paramedical-vacancy-2024/"
+                    >
+                      Near study
+                    </Link>
                   </a>
                 </li>
               </ul>
